@@ -12,6 +12,12 @@
 		C76584732B2B633E00832D38 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584722B2B633E00832D38 /* Item.swift */; };
 		C76584752B2B633F00832D38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C76584742B2B633F00832D38 /* Assets.xcassets */; };
 		C76584782B2B633F00832D38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C76584772B2B633F00832D38 /* Preview Assets.xcassets */; };
+		C76584802B2B6FFF00832D38 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C765847F2B2B6FFF00832D38 /* URLSession.swift */; };
+		C76584822B2B702000832D38 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584812B2B702000832D38 /* URL.swift */; };
+		C76584842B2B702E00832D38 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584832B2B702E00832D38 /* Network.swift */; };
+		C76584862B2B703E00832D38 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584852B2B703E00832D38 /* URLRequest.swift */; };
+		C76584882B2B704300832D38 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584872B2B704300832D38 /* NetworkError.swift */; };
+		C765848D2B2B7C4600832D38 /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C765848C2B2B7C4600832D38 /* AuthorModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +27,12 @@
 		C76584722B2B633E00832D38 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C76584742B2B633F00832D38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C76584772B2B633F00832D38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C765847F2B2B6FFF00832D38 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		C76584812B2B702000832D38 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		C76584832B2B702E00832D38 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C76584852B2B703E00832D38 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		C76584872B2B704300832D38 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		C765848C2B2B7C4600832D38 /* AuthorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,10 @@
 				C765846E2B2B633E00832D38 /* MyMangasSDP2023App.swift */,
 				C76584702B2B633E00832D38 /* ContentView.swift */,
 				C76584722B2B633E00832D38 /* Item.swift */,
+				C765848B2B2B7C0B00832D38 /* View */,
+				C765848A2B2B7BF000832D38 /* ViewModel */,
+				C76584892B2B7BE900832D38 /* Model */,
+				C765847E2B2B6F6600832D38 /* Network */,
 				C76584742B2B633F00832D38 /* Assets.xcassets */,
 				C76584762B2B633F00832D38 /* Preview Content */,
 			);
@@ -68,6 +84,40 @@
 				C76584772B2B633F00832D38 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C765847E2B2B6F6600832D38 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C76584812B2B702000832D38 /* URL.swift */,
+				C76584852B2B703E00832D38 /* URLRequest.swift */,
+				C765847F2B2B6FFF00832D38 /* URLSession.swift */,
+				C76584832B2B702E00832D38 /* Network.swift */,
+				C76584872B2B704300832D38 /* NetworkError.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		C76584892B2B7BE900832D38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C765848C2B2B7C4600832D38 /* AuthorModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C765848A2B2B7BF000832D38 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		C765848B2B2B7C0B00832D38 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +190,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76584822B2B702000832D38 /* URL.swift in Sources */,
+				C765848D2B2B7C4600832D38 /* AuthorModel.swift in Sources */,
+				C76584882B2B704300832D38 /* NetworkError.swift in Sources */,
+				C76584862B2B703E00832D38 /* URLRequest.swift in Sources */,
 				C76584712B2B633E00832D38 /* ContentView.swift in Sources */,
+				C76584842B2B702E00832D38 /* Network.swift in Sources */,
 				C76584732B2B633E00832D38 /* Item.swift in Sources */,
+				C76584802B2B6FFF00832D38 /* URLSession.swift in Sources */,
 				C765846F2B2B633E00832D38 /* MyMangasSDP2023App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
