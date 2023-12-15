@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Author: Codable, Identifiable {
-    
+struct Author: Codable {
+    let authorID: String
 }
 
 
