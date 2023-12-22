@@ -25,7 +25,7 @@ struct MyMangasSDP2023App: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(image: Manga.test, title: Manga.test)
         }
         .modelContainer(sharedModelContainer)
     }

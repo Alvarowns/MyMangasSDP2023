@@ -9,7 +9,15 @@ import SwiftUI
 
 struct DemographyGridView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+                DemographyCellView(demography: "Josei", image: .joseiManga, foregroundColor: .pink.opacity(0.8),offset: 50)
+                DemographyCellView(demography: "Shoujo", image: .shoujoManga, foregroundColor: .green.opacity(0.8),offset: 60)
+                DemographyCellView(demography: "Shounen", image: .shounenManga, foregroundColor: .red.opacity(1),offset: 130)
+                DemographyCellView(demography: "Seinen", image: .seinenManga, foregroundColor: .black.opacity(0.8),offset: 10)
+                DemographyCellView(demography: "Josei", image: .joseiManga, foregroundColor: .orange.opacity(0.8),offset: 50)
+            }
+        }
     }
 }
 

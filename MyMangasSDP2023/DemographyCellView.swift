@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DemographyCellView: View {
-    @State var genre = ""
+    @State var demography = ""
     @State var image: ImageResource
     @State var foregroundColor: Color
+    var offset: CGFloat = 0
     
     var body: some View {
             VStack {
-                Text(genre)
+                Text(demography)
                     .font(.title2)
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
@@ -23,7 +24,7 @@ struct DemographyCellView: View {
                 Image(image)
                     .resizable()
                     .scaledToFill()
-                    .offset(x: 0, y: 40)
+                    .offset(x: 0, y: offset)
                     .frame(maxWidth: 175, maxHeight: 110)
                     .clipped()
             }
@@ -37,5 +38,5 @@ struct DemographyCellView: View {
 }
 
 #Preview {
-    DemographyCellView(genre: "Erotic", image: .eroticManga, foregroundColor: .pink.opacity(0.9))
+    DemographyCellView(demography: "Josei", image: .joseiManga, foregroundColor: .pink.opacity(0.9), offset: 50)
 }

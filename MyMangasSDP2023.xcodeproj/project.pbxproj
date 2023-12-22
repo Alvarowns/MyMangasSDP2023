@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70060A12B335558005A2B4F /* LeagueSpartan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C70060A02B335558005A2B4F /* LeagueSpartan.ttf */; };
+		C70060A32B335A4E005A2B4F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70060A22B335A4E005A2B4F /* HeaderView.swift */; };
+		C712C9EE2B34A6A2009CDA7A /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C712C9ED2B34A6A2009CDA7A /* HorizontalScrollView.swift */; };
+		C74406642B2C55FF00712DBF /* MangasVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74406632B2C55FF00712DBF /* MangasVM.swift */; };
+		C764C7B32B2C37820065875C /* DTOModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C7B22B2C37820065875C /* DTOModel.swift */; };
+		C764C7B52B2C39BF0065875C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764C7B42B2C39BF0065875C /* Model.swift */; };
+		C76551C32B2CB73E00A09605 /* MyMangaAPITest.json in Resources */ = {isa = PBXBuildFile; fileRef = C76551C22B2CB73E00A09605 /* MyMangaAPITest.json */; };
+		C76551C72B2CB76200A09605 /* DataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76551C62B2CB76200A09605 /* DataTest.swift */; };
+		C76551C92B2CBF7C00A09605 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76551C82B2CBF7C00A09605 /* Presentation.swift */; };
 		C765846F2B2B633E00832D38 /* MyMangasSDP2023App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C765846E2B2B633E00832D38 /* MyMangasSDP2023App.swift */; };
 		C76584712B2B633E00832D38 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584702B2B633E00832D38 /* ContentView.swift */; };
 		C76584732B2B633E00832D38 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584722B2B633E00832D38 /* Item.swift */; };
@@ -17,10 +26,24 @@
 		C76584842B2B702E00832D38 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584832B2B702E00832D38 /* Network.swift */; };
 		C76584862B2B703E00832D38 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584852B2B703E00832D38 /* URLRequest.swift */; };
 		C76584882B2B704300832D38 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76584872B2B704300832D38 /* NetworkError.swift */; };
-		C765848D2B2B7C4600832D38 /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C765848C2B2B7C4600832D38 /* AuthorModel.swift */; };
+		C7EE91F52B3199A4003E9125 /* MangaCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE91F42B3199A4003E9125 /* MangaCoverView.swift */; };
+		C7EE91F72B31A6C8003E9125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE91F62B31A6C8003E9125 /* MainView.swift */; };
+		C7EE91F92B31AFA0003E9125 /* DemographyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE91F82B31AFA0003E9125 /* DemographyCellView.swift */; };
+		C7EE91FD2B31B9D7003E9125 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE91FC2B31B9D7003E9125 /* SearchBarView.swift */; };
+		C7EE91FF2B3206F7003E9125 /* DemographyGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE91FE2B3206F7003E9125 /* DemographyGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C700609F2B33536C005A2B4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C70060A02B335558005A2B4F /* LeagueSpartan.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LeagueSpartan.ttf; sourceTree = "<group>"; };
+		C70060A22B335A4E005A2B4F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C712C9ED2B34A6A2009CDA7A /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
+		C74406632B2C55FF00712DBF /* MangasVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangasVM.swift; sourceTree = "<group>"; };
+		C764C7B22B2C37820065875C /* DTOModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOModel.swift; sourceTree = "<group>"; };
+		C764C7B42B2C39BF0065875C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C76551C22B2CB73E00A09605 /* MyMangaAPITest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyMangaAPITest.json; sourceTree = "<group>"; };
+		C76551C62B2CB76200A09605 /* DataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTest.swift; sourceTree = "<group>"; };
+		C76551C82B2CBF7C00A09605 /* Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		C765846B2B2B633E00832D38 /* MyMangasSDP2023.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMangasSDP2023.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C765846E2B2B633E00832D38 /* MyMangasSDP2023App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangasSDP2023App.swift; sourceTree = "<group>"; };
 		C76584702B2B633E00832D38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,7 +55,11 @@
 		C76584832B2B702E00832D38 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		C76584852B2B703E00832D38 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		C76584872B2B704300832D38 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		C765848C2B2B7C4600832D38 /* AuthorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
+		C7EE91F42B3199A4003E9125 /* MangaCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaCoverView.swift; sourceTree = "<group>"; };
+		C7EE91F62B31A6C8003E9125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C7EE91F82B31AFA0003E9125 /* DemographyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographyCellView.swift; sourceTree = "<group>"; };
+		C7EE91FC2B31B9D7003E9125 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		C7EE91FE2B3206F7003E9125 /* DemographyGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographyGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +92,17 @@
 		C765846D2B2B633E00832D38 /* MyMangasSDP2023 */ = {
 			isa = PBXGroup;
 			children = (
+				C700609F2B33536C005A2B4F /* Info.plist */,
 				C765846E2B2B633E00832D38 /* MyMangasSDP2023App.swift */,
 				C76584702B2B633E00832D38 /* ContentView.swift */,
 				C76584722B2B633E00832D38 /* Item.swift */,
 				C765848B2B2B7C0B00832D38 /* View */,
+				C7EE91FB2B31B9C6003E9125 /* Components */,
 				C765848A2B2B7BF000832D38 /* ViewModel */,
 				C76584892B2B7BE900832D38 /* Model */,
 				C765847E2B2B6F6600832D38 /* Network */,
 				C76584742B2B633F00832D38 /* Assets.xcassets */,
+				C70060A02B335558005A2B4F /* LeagueSpartan.ttf */,
 				C76584762B2B633F00832D38 /* Preview Content */,
 			);
 			path = MyMangasSDP2023;
@@ -82,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				C76584772B2B633F00832D38 /* Preview Assets.xcassets */,
+				C76551C22B2CB73E00A09605 /* MyMangaAPITest.json */,
+				C76551C62B2CB76200A09605 /* DataTest.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -101,7 +133,9 @@
 		C76584892B2B7BE900832D38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C765848C2B2B7C4600832D38 /* AuthorModel.swift */,
+				C764C7B22B2C37820065875C /* DTOModel.swift */,
+				C764C7B42B2C39BF0065875C /* Model.swift */,
+				C76551C82B2CBF7C00A09605 /* Presentation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -109,6 +143,7 @@
 		C765848A2B2B7BF000832D38 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C74406632B2C55FF00712DBF /* MangasVM.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -116,8 +151,22 @@
 		C765848B2B2B7C0B00832D38 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C7EE91F62B31A6C8003E9125 /* MainView.swift */,
+				C7EE91F42B3199A4003E9125 /* MangaCoverView.swift */,
+				C712C9ED2B34A6A2009CDA7A /* HorizontalScrollView.swift */,
+				C7EE91FE2B3206F7003E9125 /* DemographyGridView.swift */,
+				C7EE91F82B31AFA0003E9125 /* DemographyCellView.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		C7EE91FB2B31B9C6003E9125 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C70060A22B335A4E005A2B4F /* HeaderView.swift */,
+				C7EE91FC2B31B9D7003E9125 /* SearchBarView.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +227,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C70060A12B335558005A2B4F /* LeagueSpartan.ttf in Resources */,
+				C76551C32B2CB73E00A09605 /* MyMangaAPITest.json in Resources */,
 				C76584782B2B633F00832D38 /* Preview Assets.xcassets in Resources */,
 				C76584752B2B633F00832D38 /* Assets.xcassets in Resources */,
 			);
@@ -191,11 +242,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76584822B2B702000832D38 /* URL.swift in Sources */,
-				C765848D2B2B7C4600832D38 /* AuthorModel.swift in Sources */,
+				C7EE91FF2B3206F7003E9125 /* DemographyGridView.swift in Sources */,
+				C76551C92B2CBF7C00A09605 /* Presentation.swift in Sources */,
 				C76584882B2B704300832D38 /* NetworkError.swift in Sources */,
+				C764C7B32B2C37820065875C /* DTOModel.swift in Sources */,
+				C74406642B2C55FF00712DBF /* MangasVM.swift in Sources */,
+				C7EE91F52B3199A4003E9125 /* MangaCoverView.swift in Sources */,
 				C76584862B2B703E00832D38 /* URLRequest.swift in Sources */,
+				C7EE91F92B31AFA0003E9125 /* DemographyCellView.swift in Sources */,
 				C76584712B2B633E00832D38 /* ContentView.swift in Sources */,
+				C7EE91FD2B31B9D7003E9125 /* SearchBarView.swift in Sources */,
+				C7EE91F72B31A6C8003E9125 /* MainView.swift in Sources */,
+				C76551C72B2CB76200A09605 /* DataTest.swift in Sources */,
+				C764C7B52B2C39BF0065875C /* Model.swift in Sources */,
+				C70060A32B335A4E005A2B4F /* HeaderView.swift in Sources */,
 				C76584842B2B702E00832D38 /* Network.swift in Sources */,
+				C712C9EE2B34A6A2009CDA7A /* HorizontalScrollView.swift in Sources */,
 				C76584732B2B633E00832D38 /* Item.swift in Sources */,
 				C76584802B2B6FFF00832D38 /* URLSession.swift in Sources */,
 				C765846F2B2B633E00832D38 /* MyMangasSDP2023App.swift in Sources */,
@@ -335,6 +397,7 @@
 				DEVELOPMENT_TEAM = 72CAUS7668;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMangasSDP2023/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -364,6 +427,7 @@
 				DEVELOPMENT_TEAM = 72CAUS7668;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMangasSDP2023/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

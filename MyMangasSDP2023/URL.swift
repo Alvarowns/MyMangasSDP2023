@@ -10,7 +10,7 @@ import Foundation
 let api = URL(string: "https://mymanga-acacademy-5607149ebe3d.herokuapp.com/")!
 
 extension URL {
-    static let getList = api.appending(path: "list/mangas")
+    static let getMangas = api.appending(path: "list/mangas/")
     static let getBestMangas = api.appending(path: "list/bestMangas")
     static let getAuthors = api.appending(path: "list/authors")
     static let getDemographic = api.appending(path: "list/demographics")
@@ -31,7 +31,7 @@ extension URL {
         api.appending(path: "list/mangaByDemographic/").appending(path: "\(demography)")
     }
     
-    static func getMangaByAuthor(authorID: String) -> URL {
-        api.appending(path: "list/authors/").appending(path: "\(authorID)")
+    static func getMangaByAuthor(id: String) -> URL {
+        api.appending(path: "list/authors/").appending(path: "\(id)")
     }
 }

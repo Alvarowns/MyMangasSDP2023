@@ -8,10 +8,27 @@
 import SwiftUI
 
 struct MainView: View {
+    @ObservedObject var viewModel = MangasVM()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+            NavigationStack {
+                VStack {
+                    HeaderView()
+                    SearchBarView()
+                    
+                    VStack(alignment: .leading) {
+                        Text("Popular")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        HorizontalScrollView()
+                    }                    
+                }
+            }
+            .padding()
     }
 }
+
 
 #Preview {
     MainView()
