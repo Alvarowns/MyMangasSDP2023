@@ -20,7 +20,10 @@ extension Manga {
                             title: "Make Me Happy",
                             startDate: "2005-01-01T00:00:00Z",
                             demographics: [],
-                            authors: [],
+                            authors: [
+                                Author(lastName: "Apellido prueba", firstName: "Nombre prueba", role: "Guionista prueba", id: "ID_DE_PRUEBA"),
+                                Author(lastName: "Apellido prueba2", firstName: "Nombre prueba2", role: "Guionista prueba2", id: "ID_DE_PRUEBA2")
+                            ],
                             score: 7.13,
                             url: "\"https://myanimelist.net/manga/3930/Make_Me_Happy\"",
                             genres: [],

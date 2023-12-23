@@ -32,21 +32,21 @@ struct Manga: Codable, Identifiable, Hashable {
     let id: Int
     let titleEnglish: String?
     
-    struct Theme: Codable, Hashable {
+    struct Theme: Codable, Hashable, Identifiable {
         let id: String?
         let theme: String?
     }
-    struct Author: Codable, Hashable {
+    struct Author: Codable, Hashable, Identifiable {
         let lastName: String?
         let firstName: String?
         let role: String?
         let id: String?
     }
-    struct Demographic: Codable, Hashable {
+    struct Demographic: Codable, Hashable, Identifiable {
         let demographic: DemographicName
         let id: String?
     }
-    struct Genre: Codable, Hashable {
+    struct Genre: Codable, Hashable, Identifiable {
         let id: String?
         let genre: String?
     }

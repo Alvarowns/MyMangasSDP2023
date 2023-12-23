@@ -11,25 +11,32 @@ struct HorizontalScrollView: View {
     @ObservedObject var viewModel = MangasVM()
     
     var body: some View {
-            ScrollView(.horizontal) {
-                LazyHStack {
-                    ForEach(viewModel.mangas.items) { mangas in
-                        if let mainPictureString = mangas.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
-                           let url = URL(string: mainPictureString) {
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: 200, maxHeight: 200)
-                            } placeholder: {
-                                ProgressView()
+            NavigationStack {
+                ScrollView(.horizontal) {
+                    LazyHStack {
+                        ForEach(viewModel.mangas.items) { manga in
+                            NavigationLink(value: manga) {
+                                if let mainPictureString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+                                   let url = URL(string: mainPictureString) {
+                                    AsyncImage(url: url) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(maxWidth: 200, maxHeight: 200)
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                }
+                            }
+                            .navigationDestination(for: Manga.self) { manga in
+                                MangaCoverView(manga: manga)
                             }
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
             }
-            .frame(minWidth: 200, maxWidth: .infinity)
-            .scrollIndicators(.hidden)
+            .frame(height: 200)
     }
 }
 

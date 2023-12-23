@@ -25,3 +25,5 @@ enum Status: String, Codable, CaseIterable, Identifiable {
 }
 
 // Crear extensión para dateFormatted.
+extension Date {
+}

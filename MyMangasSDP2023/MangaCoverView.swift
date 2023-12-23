@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct MangaCoverView: View {
-    @ObservedObject var viewModel = MangasVM()
-    @State var titleJapanese: Bool = false
-    @State var synopsis: Bool = true
+    @State private var titleJapanese: Bool = false
+    @State private var synopsis: Bool = true
     
     var manga: Manga
     
@@ -74,12 +73,16 @@ struct MangaCoverView: View {
                             if !synopsis {
                                 HStack {
                                     VStack(alignment: .leading) {
+                                        Text("Score: \(Int(manga.score ?? 0))")
+                                        Divider()
                                         Text("Chapters: \(manga.chapters ?? 0)")
-                                        Text(" \(manga.startDate ?? "")")
-                                        Text(" \(manga.endDate ?? "")")
-                                        Text(" \(manga.score ?? 0)")
-                                        Text(" \(manga.status ?? "" )")
-                                        Text(" \(manga.startDate ?? "")")
+                                        Divider()
+                                        Text("Status: \(manga.status ?? "")")
+                                        Divider()
+                                        Text("Authors:")
+                                        ForEach(manga.authors) { author in
+                                            Text("\(author.firstName ?? "") \(author.lastName ?? "")")
+                                        }
                                     }
                                     .font(.title3)
                                     Spacer()
