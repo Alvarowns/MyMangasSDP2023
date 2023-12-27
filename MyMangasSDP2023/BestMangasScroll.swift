@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HorizontalScrollView: View {
+struct BestMangasScroll: View {
     @ObservedObject var viewModel = MangasVM()
     
     var body: some View {
@@ -41,5 +41,5 @@ struct HorizontalScrollView: View {
 }
 
 #Preview {
-    HorizontalScrollView()
+    BestMangasScroll()
 }
