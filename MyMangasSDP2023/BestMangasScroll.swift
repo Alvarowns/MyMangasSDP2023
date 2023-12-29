@@ -8,23 +8,30 @@
 import SwiftUI
 
 struct BestMangasScroll: View {
-    @ObservedObject var viewModel = MangasVM()
+    @StateObject var viewModel = MangasVM()
     
     var body: some View {
             NavigationStack {
                 ScrollView(.horizontal) {
                     LazyHStack {
-                        ForEach(viewModel.mangas.items) { manga in
+                        ForEach(viewModel.bestMangas.items) { manga in
                             NavigationLink(value: manga) {
                                 if let mainPictureString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
                                    let url = URL(string: mainPictureString) {
-                                    AsyncImage(url: url) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(maxWidth: 200, maxHeight: 200)
-                                    } placeholder: {
-                                        ProgressView()
+                                    VStack {
+                                        AsyncImage(url: url) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                        } placeholder: {
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundStyle(.purple)
+                                        }
+                                        Text(manga.title ?? "")
+                                            .titlesMainStyle()
+                                            .frame(width: 125)
                                     }
                                 }
                             }
@@ -36,7 +43,7 @@ struct BestMangasScroll: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .frame(height: 200)
+            .frame(height: 250)
     }
 }
 

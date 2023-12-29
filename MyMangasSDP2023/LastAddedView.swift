@@ -8,8 +8,35 @@
 import SwiftUI
 
 struct LastAddedView: View {
+    @StateObject var viewModel = MangasVM()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            if let lastManga = viewModel.lastMangas.items.last,
+               let mainPictureString = lastManga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+               let url = URL(string: mainPictureString) {
+                NavigationLink(value: lastManga) {
+                    VStack {
+                        AsyncImage(url: url) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundStyle(.purple)
+                        }
+                        Text(lastManga.title ?? "")
+                            .titlesMainStyle()
+                            .frame(maxWidth: 150)
+                    }
+                }
+                .navigationDestination(for: Manga.self) { lastManga in
+                    MangaCoverView(manga: lastManga)
+                }
+            }
+        }
     }
 }
 

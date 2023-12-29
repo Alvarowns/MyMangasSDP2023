@@ -35,4 +35,12 @@ struct Network: DataInteractor {
     func getMangas() async throws -> MangasList {
         try await getJSON(request: .get(url: .getMangas), type: MangasList.self)
     }
+    
+    func getLastMangas() async throws -> MangasList {
+        try await getJSON(request: .get(url: .getLastMangas(page: 6484, per: 10)), type: MangasList.self)
+    }
+    
+    func getBestMangas() async throws -> MangasList {
+        try await getJSON(request: .get(url: .getBestMangas), type: MangasList.self)
+    }
 }

@@ -14,23 +14,25 @@ struct MangaCoverView: View {
     var manga: Manga
     
     var body: some View {
+        let score = String(format: "%.2f", manga.score ?? 0)
+        
         VStack {
             Text(titleJapanese ? manga.titleJapanese ?? "" : manga.title ?? "")
                 .font(.title)
                 .fontWeight(.semibold)
                 .padding(10)
             
-                Button {
-                    titleJapanese.toggle()
-                } label: {
-                    Text(titleJapanese ? "English" : "Japanese")
-                }
-                .buttonStyle(.bordered)
+            Button {
+                titleJapanese.toggle()
+            } label: {
+                Text(titleJapanese ? "English" : "Japanese")
+            }
+            .buttonStyle(.bordered)
             
             ScrollView {
                 VStack {
-                    if let imageURLTrimmed = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
-                       let imageURL = URL(string: imageURLTrimmed) {
+                    if let mainPictureString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+                       let imageURL = URL(string: mainPictureString) {
                         AsyncImage(url: imageURL) { image in
                             image
                                 .resizable()
@@ -44,6 +46,12 @@ struct MangaCoverView: View {
                         }
                         
                         VStack {
+                            HStack(alignment: .center) {
+                                ForEach(manga.demographics) { demographic in
+                                    DemogTypeView(demographic: demographic.demographic)
+                                }
+                            }
+                            
                             HStack {
                                 Button {
                                     synopsis = true
@@ -64,29 +72,62 @@ struct MangaCoverView: View {
                                 } label: {
                                     Text("Add to collection")
                                 }
+                                .tint(.purple)
                             }
                             .buttonStyle(.bordered)
+                            .padding(.vertical, 5)
                             
                             Text(synopsis ? manga.sypnosis ?? "" : "")
-                                .font(.title3)
+                                .font(.body)
+                                .padding(.horizontal, 5)
                             
                             if !synopsis {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text("Score: \(Int(manga.score ?? 0))")
-                                        Divider()
-                                        Text("Chapters: \(manga.chapters ?? 0)")
-                                        Divider()
-                                        Text("Status: \(manga.status ?? "")")
-                                        Divider()
-                                        Text("Authors:")
-                                        ForEach(manga.authors) { author in
-                                            Text("\(author.firstName ?? "") \(author.lastName ?? "")")
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Text("Score:")
+                                        Spacer()
+                                        Text(score)
+                                            .fontWeight(.medium)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Chapters:")
+                                        Spacer()
+                                        Text("\(manga.chapters ?? 0)")
+                                            .fontWeight(.medium)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Status:")
+                                        Spacer()
+                                        Text("\(manga.status ?? "")")
+                                            .fontWeight(.medium)
+                                    }
+                                    Divider()
+                                    Text("Authors:")
+                                    ForEach(manga.authors) { author in
+                                        HStack {
+                                            Spacer()
+                                            VStack(alignment: .trailing) {
+                                                Text("\(author.firstName ?? "") \(author.lastName ?? "")")
+                                                    .fontWeight(.medium)
+                                                Text("\(author.role ?? "")")
+                                                    .font(.footnote)
+                                            }
                                         }
                                     }
-                                    .font(.title3)
-                                    Spacer()
+                                    Divider()
+                                    Text("Themes:")
+                                    ForEach(manga.themes) { theme in
+                                        HStack {
+                                            Spacer()
+                                            Text(theme.theme ?? "")
+                                                .fontWeight(.medium)
+                                        }
+                                    }
                                 }
+                                .font(.body)
+                                .padding(.horizontal, 5)
                             }
                         }
                         
@@ -94,6 +135,7 @@ struct MangaCoverView: View {
                 }
                 .padding()
             }
+            .scrollIndicators(.hidden)
         }
     }
 }

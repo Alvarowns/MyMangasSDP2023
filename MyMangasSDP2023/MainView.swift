@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var viewModel = MangasVM()
+    @StateObject var viewModel = MangasVM()
     
     var body: some View {
             NavigationStack {
@@ -17,33 +17,30 @@ struct MainView: View {
                     SearchBarView()
                     
                     VStack(alignment: .leading) {
-                        Text("popular")
-                            .font(.custom("LeagueSpartan-SemiBold", size: 30))
-                        HorizontalScrollView()
+                        Text("Popular")
+                            .mainTitle(size: 25)
+                        BestMangasScroll()
                     }
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                           Text("last added")
-                                .font(.custom("LeagueSpartan-SemiBold", size: 30))
-                            if let lastManga = viewModel.mangas.items.last,
-                               let urlString = lastManga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
-                               let url = URL(string: urlString) {
-                                NavigationLink(value: lastManga) {
-                                    AsyncImage(url: url) { image in
-                                        image
-                                            .image?.resizable()
-                                    }
-                                }
-                                .navigationDestination(for: Manga.self) { manga in
-                                    MangaCoverView(manga: lastManga)
-                                }
-                            }
+                    HStack(spacing: 30) {
+                        VStack(alignment: .center) {
+                           Text("What's new")
+                                .mainTitle(size: 25)
+                            LastAddedView()
+                        }
+                        
+                        VStack(alignment: .center) {
+                           Text("Suggested")
+                                .mainTitle(size: 25)
+                                .multilineTextAlignment(.center)
+                            LastAddedView()
                         }
                     }
+                    .padding(.top)
                 }
             }
             .padding()
+            .ignoresSafeArea()
     }
 }
 

@@ -8,40 +8,67 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
     var body: some View {
-        HStack {
-            Text("mangashelf")
-                .font(.custom("LeagueSpartan-SemiBold", size: 30))
-            
-            Spacer()
-            
-            Menu {
-                Button {
-                    
-                } label: {
-                    Text("Button1")
-                }
+        VStack {
+            HStack {
+                Text("mangashelf")
+                    .mainTitle(size: 30)
                 
-                Button {
-                    
-                } label: {
-                    Text("Button2")
-                }
+                Spacer()
                 
-                Button {
+                Menu {
+                    Button {
+                        
+                    } label: {
+                        Text("Action 1")
+                    }
                     
+                    Button {
+                        
+                    } label: {
+                        Text("Action 2")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Action 3")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Action 4")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Action 5")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Action 6")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Action 7")
+                    }
                 } label: {
-                    Text("Button3")
+                    Image(systemName: "line.3.horizontal")
+                        .bold()
+                        .font(.title2)
                 }
-            } label: {
-                Image(systemName: "line.3.horizontal")
-                    .bold()
-                    .font(.title2)
+                .menuOrder(.fixed)
+                .menuIndicator(.visible)
             }
-            .menuStyle(.automatic)
-            .menuOrder(.fixed)
+            .foregroundStyle(.purple)
         }
-        .foregroundStyle(.purple)
     }
 }
 

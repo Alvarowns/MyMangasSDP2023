@@ -15,14 +15,14 @@ struct SearchBarView: View {
                 .fontWeight(.semibold)
             Spacer()
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(.gray.opacity(0.4))
         }
         .bold()
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 10)
                 .frame(height: 50)
-                .foregroundStyle(.gray.opacity(0.2))
+                .foregroundStyle(.gray.opacity(0.1))
         }
     }
 }

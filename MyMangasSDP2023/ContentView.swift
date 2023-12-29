@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var title: Manga
     
     var body: some View {
-        MainView()
+        MainTabView()
     }
 //    @Environment(\.modelContext) private var modelContext
 //    @Query private var items: [Item]

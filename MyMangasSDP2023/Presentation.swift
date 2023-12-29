@@ -48,7 +48,7 @@ struct Manga: Codable, Identifiable, Hashable {
     }
     struct Genre: Codable, Hashable, Identifiable {
         let id: String?
-        let genre: String?
+        let genre: GenreName
     }
 }
 
