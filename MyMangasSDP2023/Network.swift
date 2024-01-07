@@ -8,10 +8,11 @@
 import SwiftUI
 
 protocol DataInteractor {
-    func getMangas() async throws -> MangasList
+    func getMangas(page: Int, per: Int) async throws -> MangasList
 }
 
 struct Network: DataInteractor {
+    
     func getJSON<JSON>(request: URLRequest, type: JSON.Type) async throws -> JSON where JSON: Codable {
         let (data, response) = try await URLSession.shared.getData(for: request)
         if response.statusCode == 200 {
@@ -32,15 +33,24 @@ struct Network: DataInteractor {
         }
     }
     
-    func getMangas() async throws -> MangasList {
-        try await getJSON(request: .get(url: .getMangas), type: MangasList.self)
+    func getMangas(page: Int, per: Int) async throws -> MangasList {
+        try await getJSON(request: .get(url: .getMangas(page: page, per: per)), type: MangasList.self)
     }
     
     func getLastMangas() async throws -> MangasList {
-        try await getJSON(request: .get(url: .getLastMangas(page: 6484, per: 10)), type: MangasList.self)
+        return try await getJSON(request: .get(url: .getLastMangas(page: 6484, per: 10)), type: MangasList.self)
     }
     
     func getBestMangas() async throws -> MangasList {
         try await getJSON(request: .get(url: .getBestMangas), type: MangasList.self)
+    }
+    
+    func getMangaById(id: Int) async throws -> Manga {
+        try await getJSON(request: .get(url: .getMangaById(id: id)), type: Manga.self)
+    }
+    
+    func getRandomMangas() async throws -> MangasList {
+        let randomPage = Int.random(in: 1...6484)
+        return try await getJSON(request: .get(url: .getRandomMangas(page: randomPage, per: 10)), type: MangasList.self)
     }
 }

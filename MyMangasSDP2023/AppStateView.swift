@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct AppStateView: View {
+    @StateObject private var viewModel = MangasVM()
+    @State private var networkStatus = NetworkStatus()
+    @State private var lastState: AppState = .home
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            switch viewModel.appState {
+            case .splash:
+                SplashView()
+            case .home:
+                MainTabView()
+            case .noInternet:
+                NoConnectionView()
+            }
+        }
+        .animation(.easeIn, value: viewModel.appState)
+        .onChange(of: networkStatus.status) {
+            if networkStatus.status == .offline {
+                lastState = viewModel.appState
+                viewModel.appState = .noInternet
+            } else {
+                viewModel.appState = lastState
+            }
+        }
     }
 }
 

@@ -14,29 +14,31 @@ struct DemogTypeView: View {
         var color: Color {
             switch demographic {
             case .shounen:
-                Color.red.opacity(0.5)
+                Color.red
             case .shoujo:
-                Color.pink.opacity(0.5)
+                Color.pink
             case .seinen:
-                Color.green.opacity(0.5)
+                Color.green
             case .kids:
-                Color.blue.opacity(0.5)
+                Color.blue
             case .josei:
-                Color.orange.opacity(0.5)
+                Color.yellow
             }
         }
         Text(demographic.rawValue)
-            .font(.custom("LeagueSpartan-SemiBold", size: 20))
-            .textCase(.uppercase)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(color).colorMultiply(color)
+            .textInputAutocapitalization(.words)
             .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(color.opacity(0.5))
+                    .foregroundStyle(color.opacity(0.2))
             }
     }
 }
 
 
 #Preview {
-    DemogTypeView(demographic: .seinen)
+    DemogTypeView(demographic: .josei)
 }

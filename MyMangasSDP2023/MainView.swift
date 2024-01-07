@@ -8,38 +8,41 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var viewModel = MangasVM()
+    @StateObject private var viewModel = MangasVM()
     
     var body: some View {
             NavigationStack {
-                VStack {
-                    HeaderView()
-                    SearchBarView()
+                VStack(alignment: .leading) {
+                    HeaderView(avatar: .alvs)
                     
                     VStack(alignment: .leading) {
                         Text("Popular")
-                            .mainTitle(size: 25)
+                            .mainTitle(size: 30)
                         BestMangasScroll()
                     }
+                    .padding(.horizontal)
                     
-                    HStack(spacing: 30) {
+                    HStack {
                         VStack(alignment: .center) {
                            Text("What's new")
-                                .mainTitle(size: 25)
-                            LastAddedView()
-                        }
-                        
-                        VStack(alignment: .center) {
-                           Text("Suggested")
-                                .mainTitle(size: 25)
+                                .mainTitle(size: 30)
                                 .multilineTextAlignment(.center)
                             LastAddedView()
                         }
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .center) {
+                           Text("Suggested")
+                                .mainTitle(size: 30)
+                                .multilineTextAlignment(.center)
+                            RandomMangaView()
+                        }
                     }
-                    .padding(.top)
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
                 }
             }
-            .padding()
             .ignoresSafeArea()
     }
 }

@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct RandomMangaView: View {
+    @StateObject private var viewModel = MangasVM()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        let manga = viewModel.randomMangas.items.randomElement()
+        NavigationLink(value: manga) {
+            VStack {
+                if let mainPictureString = manga?.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+                   let imageURL = URL(string: mainPictureString) {
+                    AsyncImage(url: imageURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    .frame(height: 250)
+                    
+                    Text(manga?.title ?? "")
+                        .titlesMainStyle()
+                }
+            }
+            .navigationDestination(for: Manga.self) { manga in
+                MangaCoverView(manga: manga)
+            }
+        }
     }
 }
 

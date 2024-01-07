@@ -10,7 +10,6 @@ import Foundation
 let api = URL(string: "https://mymanga-acacademy-5607149ebe3d.herokuapp.com/")!
 
 extension URL {
-    static let getMangas = api.appending(path: "list/mangas")
     static let getBestMangas = api.appending(path: "list/bestMangas")
     static let getAuthors = api.appending(path: "list/authors")
     static let getDemographic = api.appending(path: "list/demographics")
@@ -18,6 +17,20 @@ extension URL {
     static let getThemes = api.appending(path: "list/themes")
     static let mangaByGenre = api.appending(path: "list/mangaByGenre")
     static let mangaByTheme = api.appending(path: "list/mangaByTheme")
+    
+    static func getMangas(page: Int, per: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return api.appending(path: "list/mangas").appending(queryItems: [pageQueryItem, perQueryItem])
+    }
+    
+    static func getRandomMangas(page: Int, per: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return api.appending(path: "list/mangas").appending(queryItems: [pageQueryItem, perQueryItem])
+    }
     
     static func getLastMangas(page: Int, per: Int) -> URL {
         let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
@@ -40,5 +53,8 @@ extension URL {
     
     static func getMangaByAuthor(id: String) -> URL {
         api.appending(path: "list/authors/").appending(path: "\(id)")
+    }
+    static func getMangaById(id: Int) -> URL {
+        api.appending(path: "search/manga/").appending(path: "\(id)")
     }
 }

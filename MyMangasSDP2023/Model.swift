@@ -51,8 +51,20 @@ enum GenreName: String, Codable, CaseIterable, Identifiable {
     
 }
 
-// Crear extensión para dateFormatted.
-extension Date {
+extension String {
+    func formattedDateString() -> String {
+        if let date = self.toDateFromISO8601() {
+            let dateFormatted = DateFormatter()
+            dateFormatted.dateFormat = "dd/MM/yyyy"
+            return dateFormatted.string(from: date)
+        } else {
+            return ""
+        }
+    }
+    
+    func toDateFromISO8601() -> Date? {
+        return ISO8601DateFormatter().date(from: self)
+    }
 }
 
 extension Text {
@@ -63,9 +75,16 @@ extension Text {
     
     func titlesMainStyle() -> Text {
         return self
-            .font(.footnote)
-            .fontWeight(.semibold)
-            .foregroundStyle(.black)
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .foregroundStyle(.textField)
+    }
+}
+
+extension Bool: Comparable {
+    public static func <(lhs: Self, rhs: Self) -> Bool {
+        // the only true inequality is false < true
+        !lhs && rhs
     }
 }
 

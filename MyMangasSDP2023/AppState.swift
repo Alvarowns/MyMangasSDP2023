@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum AppState {
+    case splash
+    case home
+    case noInternet
+}

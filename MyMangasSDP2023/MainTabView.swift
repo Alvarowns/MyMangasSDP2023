@@ -15,19 +15,22 @@ struct MainTabView: View {
                     Image(systemName: "house")
                 }
             
-            BestMangasScroll()
+            ExploreView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
-            BestMangasScroll()
+            
+            MyCollectionView()
                 .tabItem {
                     Image(systemName: "books.vertical")
                 }
+            
             BestMangasScroll()
                 .tabItem {
                     Image(systemName: "person")
                 }
         }
+        .tint(.purple)
     }
 }
 

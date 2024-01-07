@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct CoverView: View {
+    @State var manga: Manga
+    var frame: CGFloat
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if let mainPictureString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+           let imageURL = URL(string: mainPictureString) {
+            AsyncImage(url: imageURL) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+            }
+            .frame(height: frame)
+        }
     }
 }
 
 #Preview {
-    CoverView()
+    CoverView(manga: .test, frame: 500)
 }

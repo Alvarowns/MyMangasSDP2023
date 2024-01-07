@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SwiftData
 
 struct MangasList: Codable {
-    let items: [Manga]
-    let metadata: Metadata
+    var items: [Manga]
+    var metadata: Metadata
 }
 
 struct Manga: Codable, Identifiable, Hashable {
@@ -53,7 +54,7 @@ struct Manga: Codable, Identifiable, Hashable {
 }
 
 struct Metadata: Codable {
-    let per: Int
+    var per: Int
     let total: Int
-    let page: Int
+    var page: Int
 }

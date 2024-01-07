@@ -8,70 +8,28 @@
 import SwiftUI
 
 struct HeaderView: View {
+    let avatar: ImageResource
     
     var body: some View {
         VStack {
             HStack {
                 Text("mangashelf")
-                    .mainTitle(size: 30)
+                    .mainTitle(size: 40)
                 
                 Spacer()
                 
-                Menu {
-                    Button {
-                        
-                    } label: {
-                        Text("Action 1")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 2")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 3")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 4")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 5")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 6")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Action 7")
-                    }
-                } label: {
-                    Image(systemName: "line.3.horizontal")
-                        .bold()
-                        .font(.title2)
-                }
-                .menuOrder(.fixed)
-                .menuIndicator(.visible)
+                Image(avatar)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(.circle)
+                    .frame(maxWidth: 40)
             }
             .foregroundStyle(.purple)
         }
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    HeaderView()
+    HeaderView(avatar: .alvs)
 }

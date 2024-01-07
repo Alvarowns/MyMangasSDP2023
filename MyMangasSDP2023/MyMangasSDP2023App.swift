@@ -10,23 +10,21 @@ import SwiftData
 
 @main
 struct MyMangasSDP2023App: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+    @StateObject private var viewModel = MangasVM()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(image: Manga.test, title: Manga.test)
+            AppStateView()
+                .alert("App Alert",
+                       isPresented: $viewModel.showAlert) {
+                } message: {
+                    Text(viewModel.errorMsg)
+                }
+                .onAppear {
+                    print(URL.documentsDirectory)
+                }
+
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(for: MyCollection.self)
     }
 }
