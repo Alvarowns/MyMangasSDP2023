@@ -12,11 +12,16 @@ struct ExploreView: View {
     
     @State private var search = ""
     
+    var filterSearch: [Manga] {
+        guard !search.isEmpty else { return viewModel.moreMangas.items }
+        return viewModel.moreMangas.items.filter { $0.title!.localizedCaseInsensitiveContains(search) }
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                    ForEach(viewModel.moreMangas.items) { manga in
+                    ForEach(filterSearch) { manga in
                         NavigationLink(value: manga) {
                             VStack {
                                 CoverView(manga: manga, frame: 250)
@@ -43,7 +48,7 @@ struct ExploreView: View {
                 }
             }
             .padding(.horizontal)
-            .searchable(text: $search)
+            .searchable(text: $search, prompt: "Search Manga")
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
         }
