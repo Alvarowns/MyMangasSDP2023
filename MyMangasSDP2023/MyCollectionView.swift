@@ -15,6 +15,12 @@ struct MyCollectionView: View {
     @StateObject private var viewModel = MangasVM()
     
     @State private var search = ""
+    
+    var filterSearch: [MyCollection] {
+        guard !search.isEmpty else { return myCollection }
+        return myCollection.filter { $0.title!.localizedCaseInsensitiveContains(search) }
+    }
+    
     @State private var completed: Bool = false
     
     var body: some View {
@@ -40,7 +46,7 @@ struct MyCollectionView: View {
                         })
                     } else {
                         List {
-                            ForEach(myCollection) { manga in
+                            ForEach(filterSearch) { manga in
                                 NavigationLink(value: manga) {
                                     if let urlString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
                                        let url = URL(string: urlString) {

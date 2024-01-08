@@ -15,8 +15,12 @@ extension URL {
     static let getDemographic = api.appending(path: "list/demographics")
     static let getGenres = api.appending(path: "list/genres")
     static let getThemes = api.appending(path: "list/themes")
-    static let mangaByGenre = api.appending(path: "list/mangaByGenre")
-    static let mangaByTheme = api.appending(path: "list/mangaByTheme")
+    static let mangaByGenre = api.appending(path: "list/mangaByGenre/")
+    static let mangaByTheme = api.appending(path: "list/mangaByTheme/")
+    static let mangaByDemographic = api.appending(path: "list/mangaByDemographic/")
+    static let mangaByAuthor = api.appending(path: "list/mangaByAuthor/")
+    static let mangaById = api.appending(path: "search/manga/")
+    static let containsSearch = api.appending(path: "search/mangasContains/")
     
     static func getMangas(page: Int, per: Int) -> URL {
         let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
@@ -40,21 +44,26 @@ extension URL {
     }
     
     static func getMangaByGenre(genre: String) -> URL {
-        api.appending(path: "list/mangaByGenre/").appending(path: "\(genre)")
+        mangaByGenre.appending(path: "\(genre)")
     }
     
     static func getMangaByTheme(theme: String) -> URL {
-        api.appending(path: "list/mangaByTheme/").appending(path: "\(theme)")
+        mangaByTheme.appending(path: "\(theme)")
     }
     
-    static func getMangaByDemography(demography: String) -> URL {
-        api.appending(path: "list/mangaByDemographic/").appending(path: "\(demography)")
+    static func getMangaByDemographic(demography: String) -> URL {
+        mangaByDemographic.appending(path: "\(demography)")
     }
     
     static func getMangaByAuthor(id: String) -> URL {
-        api.appending(path: "list/authors/").appending(path: "\(id)")
+        mangaByAuthor.appending(path: "\(id)")
     }
+    
     static func getMangaById(id: Int) -> URL {
-        api.appending(path: "search/manga/").appending(path: "\(id)")
+        mangaById.appending(path: "\(id)")
+    }
+    
+    static func searchManga(contains: String) -> URL {
+        containsSearch.appending(path: "\(contains)")
     }
 }

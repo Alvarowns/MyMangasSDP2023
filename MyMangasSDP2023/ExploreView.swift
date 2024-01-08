@@ -14,7 +14,10 @@ struct ExploreView: View {
     
     var filterSearch: [Manga] {
         guard !search.isEmpty else { return viewModel.moreMangas.items }
-        return viewModel.moreMangas.items.filter { $0.title!.localizedCaseInsensitiveContains(search) }
+        Task {
+            await viewModel.searchContains(contains: search)
+        }
+        return viewModel.searchContains.items
     }
     
     var body: some View {

@@ -53,4 +53,8 @@ struct Network: DataInteractor {
         let randomPage = Int.random(in: 1...6484)
         return try await getJSON(request: .get(url: .getRandomMangas(page: randomPage, per: 10)), type: MangasList.self)
     }
+    
+    func searchContains(contains: String) async throws -> MangasList {
+        try await getJSON(request: .get(url: .searchManga(contains: contains)), type: MangasList.self)
+    }
 }

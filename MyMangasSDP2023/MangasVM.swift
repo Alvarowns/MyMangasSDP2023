@@ -18,7 +18,9 @@ final class MangasVM: ObservableObject {
     @Published var bestMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     @Published var lastMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     @Published var randomMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    @Published var searchContains: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     @Published var mangaById: Manga = Manga(status: "", volumes: 0, chapters: 0, background: "", titleJapanese: "", endDate: "", sypnosis: "", mainPicture: "", themes: [Manga.Theme(id: "", theme: "")], title: "", startDate: "", demographics: [Manga.Demographic(demographic: .josei, id: "")], authors: [Manga.Author(lastName: "", firstName: "", role: "", id: "")], score: 0.0, url: "", genres: [Manga.Genre(id: "", genre: GenreName.action)], id: 0, titleEnglish: "")
+    
     
     @Published var deleteAlert = false
     @Published var showAlert = false
@@ -103,6 +105,21 @@ final class MangasVM: ObservableObject {
             let mangas = try await network.getRandomMangas()
             await MainActor.run {
                 self.randomMangas = mangas
+            }
+        } catch {
+            await MainActor.run {
+                self.errorMsg = "\(error)"
+                self.showAlert.toggle()
+                print(errorMsg)
+            }
+        }
+    }
+    
+    func searchContains(contains: String) async {
+        do {
+            let manga = try await network.searchContains(contains: contains)
+            await MainActor.run {
+                self.searchContains = manga
             }
         } catch {
             await MainActor.run {
