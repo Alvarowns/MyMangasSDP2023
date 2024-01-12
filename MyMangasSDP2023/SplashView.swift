@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     
     @State var loading: Bool = false
     
@@ -35,4 +35,5 @@ struct SplashView: View {
 
 #Preview {
     SplashView()
+        .environmentObject(MangasVM())
 }

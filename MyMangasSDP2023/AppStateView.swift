@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppStateView: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     @State private var networkStatus = NetworkStatus()
     @State private var lastState: AppState = .home
     
@@ -37,4 +37,5 @@ struct AppStateView: View {
 
 #Preview {
     AppStateView()
+        .environmentObject(MangasVM())
 }

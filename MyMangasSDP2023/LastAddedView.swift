@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LastAddedView: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     
     var body: some View {
         NavigationStack {
@@ -31,4 +31,5 @@ struct LastAddedView: View {
 
 #Preview {
     LastAddedView()
+        .environmentObject(MangasVM())
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MangaCollectionDetailView: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     
     @State private var isFavAlert: Bool = false
     @State private var isNoFavAlert: Bool = false
@@ -21,7 +21,6 @@ struct MangaCollectionDetailView: View {
     let manga: MyCollection
     
     var body: some View {
-        
         ZStack {
             if let image = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
                let imageURL = URL(string: image) {
@@ -57,7 +56,7 @@ struct MangaCollectionDetailView: View {
                                 }
                                 
                                 TextField("Volumes in collection", value: $volumesCollection, formatter: NumberFormatter())
-                                    .frame(maxWidth: 22)
+                                    .frame(maxWidth: 24)
                                     .keyboardType(.numberPad)
                                 
                                 Button {
@@ -82,7 +81,7 @@ struct MangaCollectionDetailView: View {
                                 }
                                 
                                 TextField("Volumes read", value: $volumesRead, formatter: NumberFormatter())
-                                    .frame(maxWidth: 22)
+                                    .frame(maxWidth: 24)
                                     .keyboardType(.numberPad)
                                 
                                 Button {
@@ -126,7 +125,7 @@ struct MangaCollectionDetailView: View {
                     .foregroundStyle(!manga.favorite ? .black : .white)
                     
                     Button {
-                        if volumesCollection > manga.volumes ?? 0 || volumesRead > manga.volumesReaded {
+                        if volumesCollection > manga.volumes ?? 0 || volumesRead > manga.volumes ?? 0 {
                             errorAlert.toggle()
                         } else {
                             manga.volumesInCollection = volumesCollection
@@ -164,4 +163,5 @@ struct MangaCollectionDetailView: View {
 
 #Preview {
     MangaCollectionDetailView(manga: .test)
+        .environmentObject(MangasVM())
 }

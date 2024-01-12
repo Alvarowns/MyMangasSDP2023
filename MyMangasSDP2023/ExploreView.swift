@@ -8,52 +8,67 @@
 import SwiftUI
 
 struct ExploreView: View {
-    @StateObject var viewModel = MangasVM()
-    
-    @State private var search = ""
-    
-    var filterSearch: [Manga] {
-        guard !search.isEmpty else { return viewModel.moreMangas.items }
-        Task {
-            await viewModel.searchContains(contains: search)
-        }
-        return viewModel.searchContains.items
-    }
+    @EnvironmentObject var viewModel: MangasVM
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                    ForEach(filterSearch) { manga in
-                        NavigationLink(value: manga) {
-                            VStack {
-                                CoverView(manga: manga, frame: 250)
-                                    .onAppear {
-                                        if manga.title == viewModel.moreMangas.items.last?.title {
-                                            Task {
-                                                await viewModel.getMangas()
+                if viewModel.filterSearch.isEmpty {
+                    ContentUnavailableView(label: {
+                        VStack {
+                            Image(systemName: "doc.text.magnifyingglass")
+                                .font(.custom("size", size: 80))
+                                .foregroundStyle(.secondary)
+                            Text("Oops! No Results")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                        }
+                    }, description: {
+                        Text("There are no mangas matching: \(viewModel.search).")
+                    }, actions: {
+                        Button("Try again") {
+                            viewModel.search = ""
+                        }
+                    })
+                    .padding(.top, 200)
+                } else {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
+                        ForEach(viewModel.filterSearch) { manga in
+                            NavigationLink(value: manga) {
+                                VStack {
+                                    CoverView(manga: manga, frame: 250)
+                                        .onAppear {
+                                            if manga.id == viewModel.moreMangas.items.last?.id {
+                                                Task {
+                                                    await viewModel.getMangas()
+                                                }
                                             }
                                         }
-                                    }
-                                
-                                Text("\(manga.title ?? "")")
-                                    .font(.headline)
-                                    .foregroundStyle(.black)
-                                    .fontWeight(.semibold)
+                                    
+                                    Text("\(manga.title ?? "")")
+                                        .font(.headline)
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.semibold)
+                                }
+                                .padding(.bottom)
+                                .frame(maxHeight: 285)
                             }
-                            .padding(.bottom)
-                            .frame(maxHeight: 285)
                         }
                     }
                 }
-                .navigationDestination(for: Manga.self) { manga in
-                    MangaCoverView(manga: manga)
-                }
             }
             .padding(.horizontal)
-            .searchable(text: $search, prompt: "Search Manga")
+            .searchable(text: $viewModel.search, prompt: "Search Manga")
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                filterMenu()
+            }
+            .navigationDestination(for: Manga.self) { manga in
+                MangaCoverView(manga: manga)
+            }
         }
         .scrollIndicators(.hidden)
     }
@@ -61,4 +76,5 @@ struct ExploreView: View {
 
 #Preview {
     ExploreView()
+        .environmentObject(MangasVM())
 }

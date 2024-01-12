@@ -57,4 +57,12 @@ struct Network: DataInteractor {
     func searchContains(contains: String) async throws -> MangasList {
         try await getJSON(request: .get(url: .searchManga(contains: contains)), type: MangasList.self)
     }
+    
+    func getGenres() async throws -> [String] {
+        try await getJSON(request: .get(url: .getGenres), type: [String].self)
+    }
+    
+    func getMangaByGenre(genre: String, per: Int) async throws -> MangasList {
+        try await getJSON(request: .get(url: .getMangaByGenre(genre: genre, per: per)), type: MangasList.self)
+    }
 }

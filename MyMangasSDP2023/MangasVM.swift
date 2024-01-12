@@ -8,26 +8,38 @@
 import SwiftUI
 import SwiftData
 
+@Observable
 final class MangasVM: ObservableObject {
     var network = Network()
     
     var appState: AppState = .splash
     
-    @Published var mangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var moreMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var bestMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var lastMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var randomMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var searchContains: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    @Published var mangaById: Manga = Manga(status: "", volumes: 0, chapters: 0, background: "", titleJapanese: "", endDate: "", sypnosis: "", mainPicture: "", themes: [Manga.Theme(id: "", theme: "")], title: "", startDate: "", demographics: [Manga.Demographic(demographic: .josei, id: "")], authors: [Manga.Author(lastName: "", firstName: "", role: "", id: "")], score: 0.0, url: "", genres: [Manga.Genre(id: "", genre: GenreName.action)], id: 0, titleEnglish: "")
+    var mangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var moreMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var bestMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var lastMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var randomMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var searchContains: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
+    var mangaById: Manga = Manga(status: "", volumes: 0, chapters: 0, background: "", titleJapanese: "", endDate: "", sypnosis: "", mainPicture: "", themes: [Manga.Theme(id: "", theme: "")], title: "", startDate: "", demographics: [Manga.Demographic(demographic: .josei, id: "")], authors: [Manga.Author(lastName: "", firstName: "", role: "", id: "")], score: 0.0, url: "", genres: [Manga.Genre(id: "", genre: GenreName.action)], id: 0, titleEnglish: "")
     
+    var search: String = ""
     
-    @Published var deleteAlert = false
-    @Published var showAlert = false
-    @Published var errorMsg = ""
+    var deleteAlert = false
+    var showAlert = false
+    var errorMsg = ""
     
-    @Published var page: Int = 1
-    @Published var per: Int = 20
+    var page: Int = 1
+    var per: Int = 20
+    
+    var filterSearch: [Manga] {
+        guard !search.isEmpty else { return moreMangas.items }
+        
+        Task {
+            await searchContains(contains: search)
+        }
+        
+        return searchContains.items
+    }
     
     init() {
         Task {
@@ -117,9 +129,9 @@ final class MangasVM: ObservableObject {
     
     func searchContains(contains: String) async {
         do {
-            let manga = try await network.searchContains(contains: contains)
+            let mangas = try await network.searchContains(contains: contains)
             await MainActor.run {
-                self.searchContains = manga
+                self.searchContains = mangas
             }
         } catch {
             await MainActor.run {

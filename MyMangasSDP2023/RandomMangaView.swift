@@ -8,31 +8,33 @@
 import SwiftUI
 
 struct RandomMangaView: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     
     var body: some View {
-        let manga = viewModel.randomMangas.items.randomElement()
-        NavigationLink(value: manga) {
-            VStack {
-                if let mainPictureString = manga?.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
-                   let imageURL = URL(string: mainPictureString) {
-                    AsyncImage(url: imageURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .scaledToFit()
+        NavigationStack {
+            let manga = viewModel.randomMangas.items.randomElement()
+            NavigationLink(value: manga) {
+                VStack {
+                    if let mainPictureString = manga?.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
+                       let imageURL = URL(string: mainPictureString) {
+                        AsyncImage(url: imageURL) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        .frame(height: 250)
+                        
+                        Text(manga?.title ?? "")
+                            .titlesMainStyle()
                     }
-                    .frame(height: 250)
-                    
-                    Text(manga?.title ?? "")
-                        .titlesMainStyle()
                 }
-            }
-            .navigationDestination(for: Manga.self) { manga in
-                MangaCoverView(manga: manga)
+                .navigationDestination(for: Manga.self) { manga in
+                    MangaCoverView(manga: manga)
+                }
             }
         }
     }
@@ -40,4 +42,5 @@ struct RandomMangaView: View {
 
 #Preview {
     RandomMangaView()
+        .environmentObject(MangasVM())
 }

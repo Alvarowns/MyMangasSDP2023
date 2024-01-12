@@ -41,7 +41,7 @@ enum GenreName: String, Codable, CaseIterable, Identifiable {
     case ecchi = "Ecchi"
     case romance = "Romance"
     case girlsLove = "Girls Love"
-    case boysLoce = "Boys Love"
+    case boysLove = "Boys Love"
     case gourmet = "Gourmet"
     case erotica = "Erotica"
     case hentai = "Hentai"
@@ -87,4 +87,3 @@ extension Bool: Comparable {
         !lhs && rhs
     }
 }
-

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct BestMangasScroll: View {
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject var viewModel: MangasVM
     
     var body: some View {
-        
+        NavigationStack {
             ScrollView(.horizontal) {
                 LazyHStack {
                     ForEach(viewModel.bestMangas.items) { manga in
@@ -23,18 +23,19 @@ struct BestMangasScroll: View {
                                     .frame(width: 125)
                             }
                         }
-                        .navigationDestination(for: Manga.self) { manga in
-                            MangaCoverView(manga: manga)
-                        }
                     }
-
+                }
+                .navigationDestination(for: Manga.self) { manga in
+                    MangaCoverView(manga: manga)
+                }
             }
+            .scrollIndicators(.hidden)
+            .frame(maxHeight: 300)
         }
-        .scrollIndicators(.hidden)
-        .frame(maxHeight: 300)
     }
 }
 
 #Preview {
     BestMangasScroll()
+        .environmentObject(MangasVM())
 }

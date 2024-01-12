@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct SearchBarView: View {
-    @State var search = ""
+    @StateObject private var viewModel = MangasVM()
+    @State var secureSearch: String
+    
     var body: some View {
         HStack {
-            TextField("Search", text: $search)
-                .fontWeight(.semibold)
-            Spacer()
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.gray.opacity(0.4))
+            TextField("Search Manga", text: $secureSearch)
+                .fontWeight(.semibold)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+            Spacer()
+            Button("Search") {
+//                viewModel.search = secureSearch
+//                print(viewModel.search)
+                print("AÑADE ACCIÓN AQUÍ")
+            }
+            .buttonStyle(.bordered)
+            .foregroundStyle(.purple)
         }
         .bold()
         .padding()
@@ -28,5 +39,5 @@ struct SearchBarView: View {
 }
 
 #Preview {
-    SearchBarView()
+    SearchBarView(secureSearch: "")
 }

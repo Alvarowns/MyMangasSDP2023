@@ -43,8 +43,10 @@ extension URL {
         return api.appending(path: "list/mangas").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangaByGenre(genre: String) -> URL {
-        mangaByGenre.appending(path: "\(genre)")
+    static func getMangaByGenre(genre: String, per: Int) -> URL {
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return mangaByGenre.appending(path: "\(genre)").appending(queryItems: [perQueryItem])
     }
     
     static func getMangaByTheme(theme: String) -> URL {
