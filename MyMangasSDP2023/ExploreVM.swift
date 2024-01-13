@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class ExploreGenreVM: ObservableObject {
+final class ExploreVM: ObservableObject {
     var network = Network()
     
     var mangaByGenre: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
