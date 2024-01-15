@@ -18,8 +18,8 @@ enum DemographicName: String, Codable, CaseIterable, Identifiable {
 }
 
 enum Status: String, Codable, CaseIterable, Identifiable {
-    case currentlyPublishing = "currently_publishing"
-    case finished = "finished"
+    case currentlyPublishing = "Currently Publishing"
+    case finished = "Finished"
     
     var id: Self { self }
 }

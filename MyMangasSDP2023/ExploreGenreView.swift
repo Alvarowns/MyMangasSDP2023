@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ExploreGenreView: View {
-    @EnvironmentObject private var viewModel: ExploreGenreVM
+    @EnvironmentObject private var viewModel: ExploreVM
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                if viewModel.mangaByGenre.items.isEmpty {
+                if viewModel.mangasByGenre.items.isEmpty {
                     ContentUnavailableView(label: {
                         VStack {
                             Image(systemName: "doc.text.magnifyingglass")
@@ -25,24 +25,20 @@ struct ExploreGenreView: View {
                         }
                     }, description: {
                         Text("There are no mangas matching: \(viewModel.genreSearch).")
-                    }, actions: {
-                        Button("Try again") {
-                            viewModel.genreSearch = ""
-                        }
-                    })
+                    }, actions: {})
                     .padding(.top, 200)
                 } else {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                        ForEach(viewModel.mangaByGenre.items) { manga in
+                        ForEach(viewModel.mangasByGenre.items) { manga in
                             NavigationLink(value: manga) {
                                 VStack {
-                                    CoverView(manga: manga, frame: 250)
+                                    CoverView(manga: manga)
                                         .onAppear {
-//                                            if manga.id == viewModel.moreMangas.items.last?.id {
-//                                                Task {
-//                                                    await viewModel.getMangas()
-//                                                }
-//                                            }
+                                            if manga.id == viewModel.mangasByGenre.items.last?.id {
+                                                Task {
+                                                    await viewModel.getMangasByGenre(genre: viewModel.genreSearch)
+                                                }
+                                            }
                                         }
                                     
                                     Text("\(manga.title ?? "")")
@@ -64,11 +60,14 @@ struct ExploreGenreView: View {
                 MangaCoverView(manga: manga)
             }
         }
+        .onDisappear{
+            viewModel.page = 1
+        }
         .scrollIndicators(.hidden)
     }
 }
 
 #Preview {
     ExploreGenreView()
-        .environmentObject(ExploreGenreVM())
+        .environmentObject(ExploreVM())
 }

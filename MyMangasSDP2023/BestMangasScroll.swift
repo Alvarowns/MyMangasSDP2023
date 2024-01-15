@@ -17,7 +17,7 @@ struct BestMangasScroll: View {
                     ForEach(viewModel.bestMangas.items) { manga in
                         NavigationLink(value: manga) {
                             VStack {
-                                CoverView(manga: manga, frame: 250)
+                                CoverView(manga: manga)
                                 Text(manga.title ?? "")
                                     .titlesMainStyle()
                                     .frame(width: 125)
@@ -29,8 +29,7 @@ struct BestMangasScroll: View {
                     MangaCoverView(manga: manga)
                 }
             }
-            .scrollIndicators(.hidden)
-            .frame(maxHeight: 300)
+            .scrollIndicators(.never)
         }
     }
 }

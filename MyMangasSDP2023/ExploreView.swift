@@ -36,7 +36,7 @@ struct ExploreView: View {
                         ForEach(viewModel.filterSearch) { manga in
                             NavigationLink(value: manga) {
                                 VStack {
-                                    CoverView(manga: manga, frame: 250)
+                                    CoverView(manga: manga)
                                         .onAppear {
                                             if manga.id == viewModel.moreMangas.items.last?.id {
                                                 Task {

@@ -15,10 +15,10 @@ extension URL {
     static let getDemographic = api.appending(path: "list/demographics")
     static let getGenres = api.appending(path: "list/genres")
     static let getThemes = api.appending(path: "list/themes")
-    static let mangaByGenre = api.appending(path: "list/mangaByGenre/")
-    static let mangaByTheme = api.appending(path: "list/mangaByTheme/")
-    static let mangaByDemographic = api.appending(path: "list/mangaByDemographic/")
-    static let mangaByAuthor = api.appending(path: "list/mangaByAuthor/")
+    static let mangasByGenre = api.appending(path: "list/mangaByGenre/")
+    static let mangasByTheme = api.appending(path: "list/mangaByTheme/")
+    static let mangasByDemographic = api.appending(path: "list/mangaByDemographic/")
+    static let mangasByAuthor = api.appending(path: "list/mangaByAuthor/")
     static let mangaById = api.appending(path: "search/manga/")
     static let containsSearch = api.appending(path: "search/mangasContains/")
     
@@ -43,25 +43,29 @@ extension URL {
         return api.appending(path: "list/mangas").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangaByGenre(genre: String, per: Int) -> URL {
+    static func getMangasByGenre(genre: String, per: Int, page: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
         let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
         
-        return mangaByGenre.appending(path: "\(genre)").appending(queryItems: [perQueryItem])
+        return mangasByGenre.appending(path: "\(genre)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangaByTheme(theme: String) -> URL {
-        mangaByTheme.appending(path: "\(theme)")
+    static func getMangasByTheme(theme: String) -> URL {
+        mangasByTheme.appending(path: "\(theme)")
     }
     
-    static func getMangaByDemographic(demography: String) -> URL {
-        mangaByDemographic.appending(path: "\(demography)")
+    static func getMangasByDemographic(demography: String, per: Int, page: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return mangasByDemographic.appending(path: "\(demography)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangaByAuthor(id: String) -> URL {
-        mangaByAuthor.appending(path: "\(id)")
+    static func getMangasByAuthor(id: String) -> URL {
+        mangasByAuthor.appending(path: "\(id)")
     }
     
-    static func getMangaById(id: Int) -> URL {
+    static func getMangasById(id: Int) -> URL {
         mangaById.appending(path: "\(id)")
     }
     

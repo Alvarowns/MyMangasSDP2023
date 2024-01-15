@@ -12,23 +12,12 @@ struct RandomMangaView: View {
     
     var body: some View {
         NavigationStack {
-            let manga = viewModel.randomMangas.items.randomElement()
-            NavigationLink(value: manga) {
-                VStack {
-                    if let mainPictureString = manga?.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
-                       let imageURL = URL(string: mainPictureString) {
-                        AsyncImage(url: imageURL) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .scaledToFit()
-                        }
-                        .frame(height: 250)
+            if let manga = viewModel.randomMangas.items.randomElement() {
+                NavigationLink(value: manga) {
+                    VStack {
+                        CoverView(manga: manga)
                         
-                        Text(manga?.title ?? "")
+                        Text(manga.title ?? "")
                             .titlesMainStyle()
                     }
                 }

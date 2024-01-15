@@ -46,7 +46,7 @@ struct Network: DataInteractor {
     }
     
     func getMangaById(id: Int) async throws -> Manga {
-        try await getJSON(request: .get(url: .getMangaById(id: id)), type: Manga.self)
+        try await getJSON(request: .get(url: .getMangasById(id: id)), type: Manga.self)
     }
     
     func getRandomMangas() async throws -> MangasList {
@@ -62,7 +62,11 @@ struct Network: DataInteractor {
         try await getJSON(request: .get(url: .getGenres), type: [String].self)
     }
     
-    func getMangaByGenre(genre: String, per: Int) async throws -> MangasList {
-        try await getJSON(request: .get(url: .getMangaByGenre(genre: genre, per: per)), type: MangasList.self)
+    func getMangasByGenre(genre: String, per: Int, page: Int) async throws -> MangasList {
+        try await getJSON(request: .get(url: .getMangasByGenre(genre: genre, per: per, page: page)), type: MangasList.self)
+    }
+    
+    func getMangasByDemographic(demographic: String, per: Int, page: Int) async throws -> MangasList {
+        try await getJSON(request: .get(url: .getMangasByDemographic(demography: demographic, per: per, page: page)), type: MangasList.self)
     }
 }

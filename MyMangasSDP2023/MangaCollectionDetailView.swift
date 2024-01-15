@@ -29,7 +29,6 @@ struct MangaCollectionDetailView: View {
                         .resizable()
                         .scaledToFill()
                         .opacity(0.15)
-                        .offset(x: -50)
                         .ignoresSafeArea()
                 }
             }

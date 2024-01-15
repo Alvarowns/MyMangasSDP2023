@@ -25,7 +25,7 @@ struct MainTabView: View {
                     Image(systemName: "books.vertical")
                 }
             
-            BestMangasScroll()
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person")
                 }

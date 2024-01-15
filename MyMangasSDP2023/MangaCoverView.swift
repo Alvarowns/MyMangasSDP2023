@@ -41,7 +41,7 @@ struct MangaCoverView: View {
             
             ScrollView {
                 VStack {
-                    CoverView(manga: manga, frame: 500)
+                    CoverView(manga: manga)
                     
                     VStack {
                         HStack(alignment: .center) {

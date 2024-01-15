@@ -15,7 +15,7 @@ struct LastAddedView: View {
             if let manga = viewModel.lastMangas.items.last {
                 NavigationLink(value: manga) {
                     VStack {
-                        CoverView(manga: manga, frame: 250)
+                        CoverView(manga: manga)
                         
                         Text(manga.title ?? "")
                             .titlesMainStyle()

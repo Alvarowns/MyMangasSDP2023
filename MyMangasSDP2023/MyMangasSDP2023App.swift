@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct MyMangasSDP2023App: App {
     @StateObject private var viewModel = MangasVM()
-    @StateObject private var genreVM = ExploreGenreVM()
+    @StateObject private var genreVM = ExploreVM()
     
     var body: some Scene {
         WindowGroup {
@@ -28,6 +28,6 @@ struct MyMangasSDP2023App: App {
         }
         .modelContainer(for: MyCollection.self)
         .environmentObject(MangasVM())
-        .environmentObject(ExploreGenreVM())
+        .environmentObject(ExploreVM())
     }
 }

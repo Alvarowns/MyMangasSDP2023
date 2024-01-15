@@ -8,37 +8,60 @@
 import SwiftUI
 
 struct filterMenu: View {
-    @EnvironmentObject private var viewModel: ExploreGenreVM
+    @EnvironmentObject private var viewModel: ExploreVM
     
     var body: some View {
         Menu {
-            ForEach(GenreName.allCases) { genreName in
-                    Button {
-                        viewModel.genreSearch = genreName.rawValue
-                        Task {
-                            await viewModel.getMangaByGenre(genre: genreName.rawValue, per:20)
+            Menu {
+                ForEach(GenreName.allCases) { genreName in
+                        Button {
+                            viewModel.genreSearch = genreName.rawValue
+                            Task {
+                                await viewModel.getMangasByGenre(genre: genreName.rawValue)
+                            }
+                            viewModel.isGenreSearch.toggle()
+                        } label: {
+                            viewModel.isGenreSearch ? Image(systemName: "checkmark.square") : Image(systemName: "square")
+                            Text(genreName.rawValue)
                         }
-                        viewModel.isGenreSearch.toggle()
-                    } label: {
-                        viewModel.isGenreSearch ? Image(systemName: "checkmark.square") : Image(systemName: "square")
-                        Text(genreName.rawValue)
-                    }
+                }
+            } label: {
+                Button("Genres") {}
             }
             
+            Menu {
+                ForEach(DemographicName.allCases) { demographic in
+                        Button {
+                            viewModel.demographicName = demographic.rawValue
+                            Task {
+                                await viewModel.getMangasByDemographic(demographic: demographic.rawValue)
+                            }
+                            viewModel.isDemographicSearch.toggle()
+                        } label: {
+                            viewModel.isDemographicSearch ? Image(systemName: "checkmark.square") : Image(systemName: "square")
+                            Text(demographic.rawValue)
+                        }
+                }
+            } label: {
+                Button("Audience") {}
+            }
         } label: {
-            Button(viewModel.isGenreSearch ? "\(viewModel.genreSearch)" : "Filter") {}
+            Button("Filter") {}
                 .buttonStyle(.borderedProminent)
-                .tint(viewModel.isGenreSearch ? .purple : .gray.opacity(0.8))
+                .tint(.purple.opacity(0.8))
         }
         .padding()
         .menuStyle(.automatic)
         .sheet(isPresented: $viewModel.isGenreSearch, content: {
             ExploreGenreView()
         })
+        .sheet(isPresented: $viewModel.isDemographicSearch, content: {
+            ExploreDemographicView()
+        })
     }
 }
 
 #Preview {
     filterMenu()
-        .environmentObject(ExploreGenreVM())
+        .environmentObject(ExploreVM())
 }

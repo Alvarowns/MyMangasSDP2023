@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoverView: View {
     @State var manga: Manga
-    var frame: CGFloat
+    
     
     var body: some View {
         if let mainPictureString = manga.mainPicture?.trimmingCharacters(in: .init(charactersIn: "\"")),
@@ -23,11 +23,11 @@ struct CoverView: View {
                     .resizable()
                     .scaledToFit()
             }
-            .frame(height: frame)
+            
         }
     }
 }
 
 #Preview {
-    CoverView(manga: .test, frame: 500)
+    CoverView(manga: .test)
 }
