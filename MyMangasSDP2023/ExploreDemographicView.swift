@@ -42,9 +42,8 @@ struct ExploreDemographicView: View {
                                         }
                                     
                                     Text("\(manga.title ?? "")")
-                                        .font(.headline)
-                                        .foregroundStyle(.black)
-                                        .fontWeight(.semibold)
+                                        .titlesMainStyle()
+                                        .lineLimit(1)
                                 }
                                 .padding(.bottom)
                                 .frame(maxHeight: 285)

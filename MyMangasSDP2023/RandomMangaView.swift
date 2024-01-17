@@ -9,7 +9,9 @@ import SwiftUI
 
 struct RandomMangaView: View {
     @EnvironmentObject var viewModel: MangasVM
+    @EnvironmentObject var profieVM: ProfileVM
     
+    // Añadir filtro por edad para que no sugiera géneros +18 a menores.
     var body: some View {
         NavigationStack {
             if let manga = viewModel.randomMangas.items.randomElement() {
@@ -19,6 +21,7 @@ struct RandomMangaView: View {
                         
                         Text(manga.title ?? "")
                             .titlesMainStyle()
+                            .lineLimit(1)
                     }
                 }
                 .navigationDestination(for: Manga.self) { manga in
@@ -32,4 +35,5 @@ struct RandomMangaView: View {
 #Preview {
     RandomMangaView()
         .environmentObject(MangasVM())
+        .environmentObject(ProfileVM(profile: .test))
 }

@@ -21,6 +21,7 @@ struct BestMangasScroll: View {
                                 Text(manga.title ?? "")
                                     .titlesMainStyle()
                                     .frame(width: 125)
+                                    .lineLimit(1)
                             }
                         }
                     }

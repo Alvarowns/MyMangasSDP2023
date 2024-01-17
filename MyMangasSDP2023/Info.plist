@@ -9,7 +9,7 @@
 		<key>UIColorName</key>
 		<string>Color.white</string>
 		<key>UIImageName</key>
-		<string>mangashelfLogo</string>
+		<string>mangashelfLogo@3x</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>

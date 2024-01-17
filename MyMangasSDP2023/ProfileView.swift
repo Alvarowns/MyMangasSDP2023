@@ -6,56 +6,84 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
+    @EnvironmentObject private var viewModel: ProfileVM
     
     @State private var isExpanded: Bool = false
-    @State private var showSheet: Bool = false
+    @State private var showEditSheet: Bool = false
+    @State private var showImageSheet: Bool = false
+    @State private var image = "avatarDefault"
     
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
+                    Button("Logout") {}
                     Spacer()
                     Button("Edit") {
-                        showSheet = true
+                        showEditSheet = true
                     }
-                    .foregroundStyle(.purple)
-                    .font(.headline)
-                    .padding(.top)
-                    .padding(.horizontal)
                 }
-                Image(.alvs)
+                .foregroundStyle(.purple)
+                .font(.headline)
+                .padding()
+                
+                Image(image)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
                     .padding(.horizontal)
                     .frame(maxHeight: 200)
+                    .overlay(alignment: .bottomTrailing) {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 25)
+                            .foregroundStyle(.secondary)
+                            .onTapGesture {
+                                showImageSheet.toggle()
+                            }
+                    }
                 
                 VStack(alignment: .leading) {
                     HStack {
+                        Text("Nickname:")
+                            .frame(width: 85, alignment: .leading)
+                        Text(viewModel.profile.nickname)
+                            .bold()
+                    }
+                    Divider()
+                    HStack {
                         Text("Name:")
-                            .frame(width: 80, alignment: .leading)
-                        Text("Álvaro")
+                            .frame(width: 85, alignment: .leading)
+                        Text(viewModel.profile.name ?? "")
                     }
                     Divider()
                     HStack {
                         Text("Surname:")
-                            .frame(width: 80, alignment: .leading)
-                        Text("Santos")
+                            .frame(width: 85, alignment: .leading)
+                        Text(viewModel.profile.surname ?? "")
+                    }
+                    Divider()
+                    HStack {
+                        Text("Age:")
+                            .frame(width: 85, alignment: .leading)
+                        Text("\(viewModel.profile.age ?? 0)")
                     }
                     Divider()
                     HStack {
                         Text("Email:")
-                            .frame(width: 80, alignment: .leading)
-                        Text("asantosorellana@gmail.com")
+                            .frame(width: 85, alignment: .leading)
+                        Text(viewModel.profile.email?.absoluteString ?? "")
                     }
                     Divider()
                     VStack {
                         HStack(alignment: .top) {
                             Text("Bio: ")
-                                .frame(width: 80, alignment: .leading)
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                                .frame(width: 85, alignment: .leading)
+                            Text(viewModel.profile.bio ?? "")
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(isExpanded ? .max : 2)
                         }
@@ -67,6 +95,7 @@ struct ProfileView: View {
                             .foregroundStyle(.purple)
                     }
                 }
+                .padding(.vertical)
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
@@ -79,23 +108,54 @@ struct ProfileView: View {
                     .shadow(color: .black.opacity(0.2), radius: 10, x: 0.0, y: 0)
             }
         }
-        .sheet(isPresented: $showSheet, content: {
-            
+        .sheet(isPresented: $showEditSheet, content: {
             VStack {
                 HStack {
                     Spacer()
                     Button("Save") {
-                        showSheet = false
+                        showEditSheet = false
                     }
                     .padding()
                 }
                 Text("EDIT OPTIONS")
+                // Aún no está en la base de datos.
                 Spacer()
             }
+            .presentationDetents([.fraction(0.5)])
+        })
+        .sheet(isPresented: $showImageSheet, content: {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button("Cancel") {
+                        showImageSheet = false
+                    }
+                    .font(.headline)
+                    .foregroundStyle(.purple)
+                    .padding()
+                }
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 125))]) {
+                        ForEach(1..<9, id: \.self) { appendingNumber in
+                            Image("avatar\(appendingNumber)")
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    showImageSheet = false
+                                    image = "avatar\(appendingNumber)"
+                                }
+                        }
+                    }
+                    .padding()
+                }
+            }
+            .presentationDetents([.fraction(0.8)])
         })
     }
 }
 
 #Preview {
     ProfileView()
+        .environmentObject(ProfileVM(profile: .test))
 }

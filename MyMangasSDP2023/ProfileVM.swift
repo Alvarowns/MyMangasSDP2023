@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+@Observable
+final class ProfileVM: ObservableObject {
+    var profile: ProfileModel
+    
+    init(profile: ProfileModel) {
+        self.profile = profile
+    }
+}

@@ -12,7 +12,7 @@ struct MyCollectionView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \MyCollection.favorite, order: .reverse) private var myCollection: [MyCollection]
     
-    @StateObject private var viewModel = MangasVM()
+    @EnvironmentObject private var viewModel: MangasVM
     
     @State private var search = ""
     
@@ -20,8 +20,6 @@ struct MyCollectionView: View {
         guard !search.isEmpty else { return myCollection }
         return myCollection.filter { $0.title!.localizedCaseInsensitiveContains(search) }
     }
-    
-    @State private var completed: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -101,6 +99,8 @@ struct MyCollectionView: View {
                 }
             }
             .searchable(text: $search)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
             .navigationTitle("My Collection")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: MyCollection.self) { manga in
@@ -120,4 +120,5 @@ struct MyCollectionView: View {
 
 #Preview {
     MyCollectionView()
+        .environmentObject(MangasVM())
 }

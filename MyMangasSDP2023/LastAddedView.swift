@@ -19,6 +19,7 @@ struct LastAddedView: View {
                         
                         Text(manga.title ?? "")
                             .titlesMainStyle()
+                            .lineLimit(1)
                     }
                 }
                 .navigationDestination(for: Manga.self) { manga in
