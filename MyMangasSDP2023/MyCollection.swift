@@ -18,7 +18,7 @@ class MyCollection {
     var endDate: String?
     var sypnosis: String?
     var mainPicture: String?
-    var title: String?
+    @Attribute(.unique) var title: String?
     var startDate: String?
     var score: Double?
     var url: String?

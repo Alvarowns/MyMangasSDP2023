@@ -10,13 +10,13 @@ import SwiftData
 
 @Model
 class MyProfile {
-    let nickname: String
-    let name: String?
-    let surname: String?
-    let age: Int?
-    let email: URL?
-    let bio: String?
-    let image: String?
+    var nickname: String
+    var name: String?
+    var surname: String?
+    var age: Int?
+    var email: URL?
+    var bio: String?
+    var image: String?
     
     init(nickname: String, name: String?, surname: String?, age: Int?, email: URL?, bio: String?, image: String?) {
         self.nickname = nickname

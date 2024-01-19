@@ -63,6 +63,6 @@ extension MyCollection {
 
 }
 
-extension ProfileModel {
-    static let test = ProfileModel(nickname: "soN1c", name: "Álvaro", surname: "Santos", age: 33, email: URL(string: "asantosorellana@gmail.com"), bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image: .avatar1)
+extension MyProfile {
+    static let test = MyProfile(nickname: "soN1c", name: "Álvaro", surname: "Santos", age: 33, email: URL(string: "asantosorellana@gmail.com"), bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", image: "avatar1")
 }
