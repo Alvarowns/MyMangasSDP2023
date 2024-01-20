@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RandomMangaView: View {
+struct SuggestedView: View {
     @EnvironmentObject var viewModel: MangasVM
     
     // Añadir filtro por edad para que no sugiera géneros +18 a menores.
@@ -32,7 +32,6 @@ struct RandomMangaView: View {
 }
 
 #Preview {
-    RandomMangaView()
+    SuggestedView()
         .environmentObject(MangasVM())
-//        .environmentObject(ProfileVM(profile: .test))
 }
