@@ -16,4 +16,9 @@ final class ProfileVM: ObservableObject {
     var email: URL? = URL(string: "")
     var bio: String = ""
     var image: String = "avatarDefault"
+    
+    var isExpanded: Bool = false
+    var showEditSheet: Bool = false
+    var showImageSheet: Bool = false
+    var imageSelected: Int = 0
 }

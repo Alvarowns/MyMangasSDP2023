@@ -22,6 +22,17 @@ enum Status: String, Codable, CaseIterable, Identifiable {
     case finished = "Finished"
     
     var id: Self { self }
+    
+    static func refactorStatus(_ apiStatus: String) -> Status? {
+        switch apiStatus.lowercased() {
+        case "currently_publishing":
+            return .currentlyPublishing
+        case "finished":
+            return .finished
+        default:
+            return nil
+        }
+    }
 }
 
 enum GenreName: String, Codable, CaseIterable, Identifiable {

@@ -18,11 +18,11 @@ class MyCollection {
     var endDate: String?
     var sypnosis: String?
     var mainPicture: String?
-    @Attribute(.unique) var title: String?
+    var title: String?
     var startDate: String?
     var score: Double?
     var url: String?
-    var id: Int
+    @Attribute(.unique) var id: Int
     var titleEnglish: String?
     var volumesInCollection: Int
     var volumesReaded: Int

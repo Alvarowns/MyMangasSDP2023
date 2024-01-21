@@ -9,10 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct MyCollectionView: View {
+    @EnvironmentObject private var viewModel: MangasVM
     @Environment(\.modelContext) var modelContext
     @Query(sort: \MyCollection.favorite, order: .reverse) private var myCollection: [MyCollection]
-    
-    @EnvironmentObject private var viewModel: MangasVM
     
     @State private var search = ""
     

@@ -13,7 +13,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                HeaderView(avatar: .alvs)
+                HeaderView()
                 
                 VStack(alignment: .leading) {
                     Text("Popular")
@@ -36,7 +36,7 @@ struct MainView: View {
                         Text("Suggested")
                             .mainTitle(size: 30)
                             .multilineTextAlignment(.center)
-                        RandomMangaView()
+                        SuggestedView()
                     }
                 }
                 .padding(.horizontal)

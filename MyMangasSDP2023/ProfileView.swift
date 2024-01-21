@@ -9,15 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct ProfileView: View {
+    @EnvironmentObject private var viewModel: ProfileVM
     @Environment(\.modelContext) var modelContext
     @Query private var myProfile: [MyProfile]
-    
-    @EnvironmentObject private var viewModel: ProfileVM
-    
-    @State private var isExpanded: Bool = false
-    @State private var showEditSheet: Bool = false
-    @State private var showImageSheet: Bool = false
-    @State private var imageSelected: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -26,7 +20,7 @@ struct ProfileView: View {
                     Button("Logout") {}
                     Spacer()
                     Button("Edit") {
-                        showEditSheet = true
+                        viewModel.showEditSheet = true
                     }
                 }
                 .foregroundStyle(.purple)
@@ -46,7 +40,7 @@ struct ProfileView: View {
                             .frame(maxWidth: 25)
                             .foregroundStyle(.secondary)
                             .onTapGesture {
-                                showImageSheet.toggle()
+                                viewModel.showImageSheet.toggle()
                             }
                     }
                 
@@ -88,12 +82,12 @@ struct ProfileView: View {
                                 .frame(width: 85, alignment: .leading)
                             Text(myProfile.first?.bio ?? "")
                                 .multilineTextAlignment(.leading)
-                                .lineLimit(isExpanded ? .max : 2)
+                                .lineLimit(viewModel.isExpanded ? .max : 2)
                         }
                         
-                        Text(isExpanded ? "Shrink" : "Expand")
+                        Text(viewModel.isExpanded ? "Shrink" : "Expand")
                             .onTapGesture {
-                                isExpanded.toggle()
+                                viewModel.isExpanded.toggle()
                             }
                             .foregroundStyle(.purple)
                     }
@@ -111,7 +105,7 @@ struct ProfileView: View {
                     .shadow(color: .black.opacity(0.2), radius: 10, x: 0.0, y: 0)
             }
         }
-        .sheet(isPresented: $showEditSheet, content: {
+        .sheet(isPresented: $viewModel.showEditSheet, content: {
             VStack {
                 HStack {
                     Spacer()
@@ -121,7 +115,7 @@ struct ProfileView: View {
                     Spacer()
                     Button("Save") {
                         saveData()
-                        showEditSheet = false
+                        viewModel.showEditSheet = false
                     }
                     .font(.headline)
                     .foregroundStyle(.purple)
@@ -129,14 +123,22 @@ struct ProfileView: View {
                     .padding(.horizontal)
                 }
                 
-                Form {
-                    TextField("Nickname", text: $viewModel.nickname)
-                    TextField("Name", text: $viewModel.name)
-                    TextField("Surame", text: $viewModel.surname)
-                    TextField("Age", value: $viewModel.age, formatter: NumberFormatter())
-                    TextField("Bio", text: $viewModel.bio)
+                NavigationStack {
+                    Form {
+                        TextField("Nickname", text: $viewModel.nickname)
+                            .textContentType(.nickname)
+                            .textInputAutocapitalization(.never)
+                        TextField("Name", text: $viewModel.name)
+                            .textContentType(.name)
+                        TextField("Surame", text: $viewModel.surname)
+                            .textContentType(.familyName)
+                        TextField("Age", value: $viewModel.age, formatter: NumberFormatter())
+                        TextField("Bio", text: $viewModel.bio)
+                    }
+                    .autocorrectionDisabled()
+                    .formStyle(.grouped)
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
                 
                 Section(header: Text("Select your avatar").font(.headline)) {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
@@ -147,26 +149,27 @@ struct ProfileView: View {
                                 .clipShape(Circle())
                                 .background {
                                     Circle()
-                                        .stroke(lineWidth: imageSelected == appendingNumber ? 6 : 0)
+                                        .stroke(lineWidth: viewModel.imageSelected == appendingNumber ? 6 : 0)
                                         .foregroundStyle(.pink)
                                 }
                                 .onTapGesture {
                                     viewModel.image = "avatar\(appendingNumber)"
-                                    imageSelected = appendingNumber
+                                    viewModel.imageSelected = appendingNumber
                                 }
                         }
                     }
                     .padding()
-                }            }
-            .presentationDetents([.fraction(0.8)])
+                }
+            }
+            .presentationDetents([.fraction(0.75)])
         })
-        .sheet(isPresented: $showImageSheet, content: {
+        .sheet(isPresented: $viewModel.showImageSheet, content: {
             VStack {
                 HStack {
                     Spacer()
                     Button("Save") {
                         saveData()
-                        showImageSheet = false
+                        viewModel.showImageSheet = false
                     }
                     .font(.headline)
                     .foregroundStyle(.purple)
@@ -184,11 +187,11 @@ struct ProfileView: View {
                                     .clipShape(Circle())
                                     .background {
                                         Circle()
-                                            .stroke(lineWidth: imageSelected == appendingNumber ? 6 : 0)
+                                            .stroke(lineWidth: viewModel.imageSelected == appendingNumber ? 6 : 0)
                                             .foregroundStyle(.pink)
                                     }
                                     .onTapGesture {
-                                        imageSelected = appendingNumber
+                                        viewModel.imageSelected = appendingNumber
                                         viewModel.image = "avatar\(appendingNumber)"
                                     }
                             }
@@ -200,6 +203,7 @@ struct ProfileView: View {
             .presentationDetents([.fraction(0.8)])
         })
     }
+    
     func saveData() {
         let updateData = MyProfile(nickname: viewModel.nickname, name: viewModel.name, surname: viewModel.surname, age: viewModel.age, email: viewModel.email, bio: viewModel.bio, image: viewModel.image)
         do {

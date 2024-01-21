@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SuggestedView: View {
-    @EnvironmentObject var viewModel: MangasVM
+    @EnvironmentObject var viewModel: SuggestedVM
     
-    // Añadir filtro por edad para que no sugiera géneros +18 a menores.
     var body: some View {
         NavigationStack {
             if let manga = viewModel.randomMangas.items.randomElement() {
@@ -33,5 +32,5 @@ struct SuggestedView: View {
 
 #Preview {
     SuggestedView()
-        .environmentObject(MangasVM())
+        .environmentObject(SuggestedVM())
 }

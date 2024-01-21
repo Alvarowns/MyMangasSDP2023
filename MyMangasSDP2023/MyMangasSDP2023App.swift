@@ -11,8 +11,11 @@ import SwiftData
 @main
 struct MyMangasSDP2023App: App {
     @StateObject private var viewModel = MangasVM()
-    @StateObject private var genreVM = ExploreVM()
+    @StateObject private var exploreVM = ExploreVM()
+    @StateObject private var suggestedVM = SuggestedVM()
     @StateObject private var profileVM = ProfileVM()
+    @StateObject private var coverVM = MangaCoverViewVM()
+    @StateObject private var mangaInCollectionVM = MangaInCollectionDetailVM()
     
     var body: some Scene {
         WindowGroup {
@@ -31,5 +34,8 @@ struct MyMangasSDP2023App: App {
         .environmentObject(MangasVM())
         .environmentObject(ExploreVM())
         .environmentObject(ProfileVM())
+        .environmentObject(SuggestedVM())
+        .environmentObject(MangaCoverViewVM())
+        .environmentObject(MangaInCollectionDetailVM())
     }
 }

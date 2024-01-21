@@ -9,14 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MangaCollectionDetailView: View {
-    @EnvironmentObject var viewModel: MangasVM
-    
-    @State private var isFavAlert: Bool = false
-    @State private var isNoFavAlert: Bool = false
-    @State private var isSubmitAlert: Bool = false
-    @State private var errorAlert: Bool = false
-    @State private var volumesCollection: Int = 0
-    @State private var volumesRead: Int = 0
+    @EnvironmentObject var viewModel: MangaInCollectionDetailVM
     
     let manga: MyCollection
     
@@ -49,17 +42,17 @@ struct MangaCollectionDetailView: View {
                             
                             HStack {
                                 Button {
-                                    volumesCollection -= 1
+                                    viewModel.volumesCollection -= 1
                                 } label: {
                                     Image(systemName: "minus.square.fill")
                                 }
                                 
-                                TextField("Volumes in collection", value: $volumesCollection, formatter: NumberFormatter())
+                                TextField("Volumes in collection", value: $viewModel.volumesCollection, formatter: NumberFormatter())
                                     .frame(maxWidth: 24)
                                     .keyboardType(.numberPad)
                                 
                                 Button {
-                                    volumesCollection += 1
+                                    viewModel.volumesCollection += 1
                                 } label: {
                                     Image(systemName: "plus.square.fill")
                                 }
@@ -74,17 +67,17 @@ struct MangaCollectionDetailView: View {
                             
                             HStack {
                                 Button {
-                                    volumesRead -= 1
+                                    viewModel.volumesRead -= 1
                                 } label: {
                                     Image(systemName: "minus.square.fill")
                                 }
                                 
-                                TextField("Volumes read", value: $volumesRead, formatter: NumberFormatter())
+                                TextField("Volumes read", value: $viewModel.volumesRead, formatter: NumberFormatter())
                                     .frame(maxWidth: 24)
                                     .keyboardType(.numberPad)
                                 
                                 Button {
-                                    volumesRead += 1
+                                    viewModel.volumesRead += 1
                                 } label: {
                                     Image(systemName: "plus.square.fill")
                                 }
@@ -101,10 +94,10 @@ struct MangaCollectionDetailView: View {
                     Button {
                         if manga.favorite == false {
                             manga.favorite = true
-                            isFavAlert.toggle()
+                            viewModel.isFavAlert.toggle()
                         } else {
                             manga.favorite = false
-                            isNoFavAlert.toggle()
+                            viewModel.isNoFavAlert.toggle()
                         }
                     } label: {
                         if manga.favorite {
@@ -124,12 +117,12 @@ struct MangaCollectionDetailView: View {
                     .foregroundStyle(!manga.favorite ? .black : .white)
                     
                     Button {
-                        if volumesCollection > manga.volumes ?? 0 || volumesRead > manga.volumes ?? 0 {
-                            errorAlert.toggle()
+                        if viewModel.volumesCollection > manga.volumes ?? 0 || viewModel.volumesRead > manga.volumes ?? 0 {
+                            viewModel.errorAlert.toggle()
                         } else {
-                            manga.volumesInCollection = volumesCollection
-                            manga.volumesReaded = volumesRead
-                            isSubmitAlert.toggle()
+                            manga.volumesInCollection = viewModel.volumesCollection
+                            manga.volumesReaded = viewModel.volumesRead
+                            viewModel.isSubmitAlert.toggle()
                         }
                     } label: {
                         Text("Save changes")
@@ -147,13 +140,13 @@ struct MangaCollectionDetailView: View {
             .padding(.top)
         }
         .onAppear {
-            volumesCollection = manga.volumesInCollection
-            volumesRead = manga.volumesReaded
+            viewModel.volumesCollection = manga.volumesInCollection
+            viewModel.volumesRead = manga.volumesReaded
         }
-        .alert("Changes submitted", isPresented: $isSubmitAlert) {}
-        .alert("Volumes in collection or read can't be higher than the total volumes", isPresented: $errorAlert) {}
-        .alert("\(manga.title ?? "") added to Favorites", isPresented: $isFavAlert) {}
-        .alert("\(manga.title ?? "") removed from Favorites", isPresented: $isNoFavAlert) {}
+        .alert("Changes submitted", isPresented: $viewModel.isSubmitAlert) {}
+        .alert("Volumes in collection or read can't be higher than the total volumes", isPresented: $viewModel.errorAlert) {}
+        .alert("\(manga.title ?? "") added to Favorites", isPresented: $viewModel.isFavAlert) {}
+        .alert("\(manga.title ?? "") removed from Favorites", isPresented: $viewModel.isNoFavAlert) {}
         .task {
             await viewModel.getMangaById(id: manga.id)
         }
@@ -162,5 +155,5 @@ struct MangaCollectionDetailView: View {
 
 #Preview {
     MangaCollectionDetailView(manga: .test)
-        .environmentObject(MangasVM())
+        .environmentObject(MangaInCollectionDetailVM())
 }

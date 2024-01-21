@@ -18,9 +18,7 @@ final class MangasVM: ObservableObject {
     var moreMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     var bestMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     var lastMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    var randomMangas: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     var searchContains: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
-    var mangaById: Manga = Manga(status: "", volumes: 0, chapters: 0, background: "", titleJapanese: "", endDate: "", sypnosis: "", mainPicture: "", themes: [Manga.Theme(id: "", theme: "")], title: "", startDate: "", demographics: [Manga.Demographic(demographic: .josei, id: "")], authors: [Manga.Author(lastName: "", firstName: "", role: "", id: "")], score: 0.0, url: "", genres: [Manga.Genre(id: "", genre: GenreName.action)], id: 0, titleEnglish: "")
     
     var search: String = ""
     
@@ -46,7 +44,6 @@ final class MangasVM: ObservableObject {
             await getMangas()
             await getLastMangas()
             await getBestMangas()
-            await getRandomMangas()
         }
     }
     
@@ -87,36 +84,6 @@ final class MangasVM: ObservableObject {
             let mangas = try await network.getLastMangas()
             await MainActor.run {
                 self.lastMangas = mangas
-            }
-        } catch {
-            await MainActor.run {
-                self.errorMsg = "\(error)"
-                self.showAlert.toggle()
-                print(errorMsg)
-            }
-        }
-    }
-    
-    func getMangaById(id: Int) async {
-        do {
-            let manga = try await network.getMangaById(id: id)
-            await MainActor.run {
-                self.mangaById = manga
-            }
-        } catch {
-            await MainActor.run {
-                self.errorMsg = "\(error)"
-                self.showAlert.toggle()
-                print(errorMsg)
-            }
-        }
-    }
-    
-    func getRandomMangas() async {
-        do {
-            let mangas = try await network.getRandomMangas()
-            await MainActor.run {
-                self.randomMangas = mangas
             }
         } catch {
             await MainActor.run {

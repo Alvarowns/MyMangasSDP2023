@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HeaderView: View {
-    let avatar: ImageResource
+    @EnvironmentObject private var viewModel: ProfileVM
+    @Environment(\.modelContext) var modelContext
+    @Query private var myProfile: [MyProfile]
     
     var body: some View {
         VStack {
@@ -18,7 +21,7 @@ struct HeaderView: View {
                 
                 Spacer()
                 
-                Image(avatar)
+                Image(myProfile.first?.image ?? "avatarDefault")
                     .resizable()
                     .scaledToFit()
                     .clipShape(.circle)
@@ -31,5 +34,6 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(avatar: .alvs)
+    HeaderView()
+        .environmentObject(ProfileVM())
 }
