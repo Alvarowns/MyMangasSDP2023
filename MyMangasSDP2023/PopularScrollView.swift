@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BestMangasScroll: View {
+struct PopularScrollView: View {
     @EnvironmentObject var viewModel: MangasVM
     
     var body: some View {
@@ -36,6 +36,6 @@ struct BestMangasScroll: View {
 }
 
 #Preview {
-    BestMangasScroll()
+    PopularScrollView()
         .environmentObject(MangasVM())
 }
