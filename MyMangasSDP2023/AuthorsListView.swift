@@ -8,18 +8,51 @@
 import SwiftUI
 
 struct AuthorsListView: View {
-    @EnvironmentObject private var viewModel: ExploreVM
+    @EnvironmentObject private var viewModel: AuthorsVM
+    
     var body: some View {
-        List {
-            ForEach(viewModel.authors) { author in
-                Button(author.firstName ?? "") {
+        NavigationStack {
+            List {
+                ForEach(viewModel.filterSearch) { author in
+                    if author.firstName != "" {
+                        Button {
+                            viewModel.authorName = "\(author.firstName ?? "") \(author.lastName ?? "")"
+                            viewModel.authorId = author.id ?? ""
+                            Task {
+                                await viewModel.getMangasByAuthor(id: author.id ?? "")
+                            }
+                            viewModel.isAuthorSearch.toggle()
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("\(author.firstName ?? "") \(author.lastName ?? "")")
+                                        .foregroundStyle(.black)
+                                    Text(author.role ?? "")
+                                        .font(.footnote)
+                                        .foregroundStyle(.gray)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(.gray)
+                                    .font(.caption)
+                            }
+                        }
+                    }
                 }
+                .sheet(isPresented: $viewModel.isAuthorSearch, content: {
+                    ExploreAuthorView()
+                })
             }
+            .listStyle(.grouped)
+            .searchable(text: $viewModel.search, prompt: "Search by Author name")
+            .navigationTitle("Authors")
+            .navigationBarTitleDisplayMode(.inline)
+            .autocorrectionDisabled()
         }
     }
 }
 
 #Preview {
     AuthorsListView()
-        .environmentObject(ExploreVM())
+        .environmentObject(AuthorsVM())
 }

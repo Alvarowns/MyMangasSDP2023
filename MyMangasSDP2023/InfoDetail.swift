@@ -167,6 +167,7 @@ struct InfoDetail: View {
                                 let apiStatus = manga.status
                                 if let status = Status.refactorStatus(apiStatus ?? "") {
                                     Text("\(status.rawValue)")
+                                        .fontWeight(.medium)
                                 }
                             }
                             Divider()

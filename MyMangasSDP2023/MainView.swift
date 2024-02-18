@@ -17,16 +17,23 @@ struct MainView: View {
                 
                 VStack(alignment: .leading) {
                     Text("Popular")
-                        .mainTitle(size: 30)
-                    BestMangasScroll()
+                        .mainTitle(size: 35)
+                    PopularScrollView()
                 }
-                .padding(.horizontal)
+                .safeAreaPadding(.horizontal)
+                
+                HStack {
+                    Spacer()
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+                .padding(.vertical, 5)
                 
                 HStack {
                     VStack(alignment: .center) {
                         Text("What's new")
                             .mainTitle(size: 30)
-                            .multilineTextAlignment(.center)
                         LastAddedView()
                     }
                     
@@ -35,14 +42,13 @@ struct MainView: View {
                     VStack(alignment: .center) {
                         Text("Suggested")
                             .mainTitle(size: 30)
-                            .multilineTextAlignment(.center)
                         SuggestedView()
                     }
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 10)
             }
         }
+        .padding(.vertical)
     }
 }
 

@@ -31,6 +31,7 @@ struct ProfileView: View {
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
+                    .shadow(radius: 5, y: 5)
                     .padding(.horizontal)
                     .frame(maxHeight: 200)
                     .overlay(alignment: .bottomTrailing) {
@@ -85,11 +86,13 @@ struct ProfileView: View {
                                 .lineLimit(viewModel.isExpanded ? .max : 2)
                         }
                         
-                        Text(viewModel.isExpanded ? "Shrink" : "Expand")
-                            .onTapGesture {
-                                viewModel.isExpanded.toggle()
-                            }
-                            .foregroundStyle(.purple)
+                        if !viewModel.bio.isEmpty {
+                            Text(viewModel.isExpanded ? "Shrink" : "Expand")
+                                .onTapGesture {
+                                    viewModel.isExpanded.toggle()
+                                }.foregroundStyle(.purple)
+                        }
+                        
                     }
                 }
                 .padding(.vertical)
@@ -133,6 +136,7 @@ struct ProfileView: View {
                         TextField("Surame", text: $viewModel.surname)
                             .textContentType(.familyName)
                         TextField("Age", value: $viewModel.age, formatter: NumberFormatter())
+                            .keyboardType(.numberPad)
                         TextField("Bio", text: $viewModel.bio)
                     }
                     .autocorrectionDisabled()

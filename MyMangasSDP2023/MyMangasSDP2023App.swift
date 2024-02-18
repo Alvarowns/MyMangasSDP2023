@@ -16,6 +16,7 @@ struct MyMangasSDP2023App: App {
     @StateObject private var profileVM = ProfileVM()
     @StateObject private var coverVM = MangaCoverViewVM()
     @StateObject private var mangaInCollectionVM = MangaInCollectionDetailVM()
+    @StateObject private var authorsVM = AuthorsVM()
     
     var body: some Scene {
         WindowGroup {
@@ -37,5 +38,6 @@ struct MyMangasSDP2023App: App {
         .environmentObject(SuggestedVM())
         .environmentObject(MangaCoverViewVM())
         .environmentObject(MangaInCollectionDetailVM())
+        .environmentObject(AuthorsVM())
     }
 }

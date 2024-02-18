@@ -10,7 +10,7 @@ import Foundation
 let api = URL(string: "https://mymanga-acacademy-5607149ebe3d.herokuapp.com/")!
 
 extension URL {
-    static let getBestMangas = api.appending(path: "list/bestMangas")
+    static let bestMangas = api.appending(path: "list/bestMangas")
     static let getAuthors = api.appending(path: "list/authors")
     static let getDemographic = api.appending(path: "list/demographics")
     static let getGenres = api.appending(path: "list/genres")
@@ -27,6 +27,13 @@ extension URL {
         let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
         
         return api.appending(path: "list/mangas").appending(queryItems: [pageQueryItem, perQueryItem])
+    }
+    
+    static func getBestMangas(page: Int, per: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return api.appending(path: "list/bestMangas").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
     static func getRandomMangas(page: Int, per: Int) -> URL {
@@ -50,8 +57,11 @@ extension URL {
         return mangasByGenre.appending(path: "\(genre)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangasByTheme(theme: String) -> URL {
-        mangasByTheme.appending(path: "\(theme)")
+    static func getMangasByTheme(theme: String, per: Int, page: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return mangasByTheme.appending(path: "\(theme)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
     static func getMangasByDemographic(demography: String, per: Int, page: Int) -> URL {
@@ -61,8 +71,11 @@ extension URL {
         return mangasByDemographic.appending(path: "\(demography)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
-    static func getMangasByAuthor(id: String) -> URL {
-        mangasByAuthor.appending(path: "\(id)")
+    static func getMangasByAuthor(id: String, per: Int, page: Int) -> URL {
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        let perQueryItem = URLQueryItem(name: "per", value: "\(per)")
+        
+        return mangasByAuthor.appending(path: "\(id)").appending(queryItems: [pageQueryItem, perQueryItem])
     }
     
     static func getMangasById(id: Int) -> URL {

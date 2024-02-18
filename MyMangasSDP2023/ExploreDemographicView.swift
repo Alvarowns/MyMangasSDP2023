@@ -14,7 +14,7 @@ struct ExploreDemographicView: View {
         NavigationStack {
             ScrollView {
                 if viewModel.mangasByDemographic.items.isEmpty {
-                    ContentUnavailableView(label: {
+                    ContentUnavailableView {
                         VStack {
                             Image(systemName: "doc.text.magnifyingglass")
                                 .font(.custom("size", size: 80))
@@ -23,9 +23,11 @@ struct ExploreDemographicView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                         }
-                    }, description: {
+                    } description: {
                         Text("There are no mangas matching: \(viewModel.demographicName).")
-                    }, actions: {})
+                    } actions: {
+                        
+                    }
                     .padding(.top, 200)
                 } else {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {

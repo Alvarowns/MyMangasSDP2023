@@ -14,7 +14,7 @@ struct ExploreGenreView: View {
         NavigationStack {
             ScrollView {
                 if viewModel.mangasByGenre.items.isEmpty {
-                    ContentUnavailableView(label: {
+                    ContentUnavailableView {
                         VStack {
                             Image(systemName: "doc.text.magnifyingglass")
                                 .font(.custom("size", size: 80))
@@ -23,9 +23,11 @@ struct ExploreGenreView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                         }
-                    }, description: {
-                        Text("There are no mangas matching: \(viewModel.genreSearch).")
-                    }, actions: {})
+                    } description: {
+                        Text("There are no mangas matching: \(viewModel.genreName).")
+                    } actions: {
+                        
+                    }
                     .padding(.top, 200)
                 } else {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
@@ -36,7 +38,7 @@ struct ExploreGenreView: View {
                                         .onAppear {
                                             if manga.id == viewModel.mangasByGenre.items.last?.id {
                                                 Task {
-                                                    await viewModel.getMangasByGenre(genre: viewModel.genreSearch)
+                                                    await viewModel.getMangasByGenre(genre: viewModel.genreName)
                                                 }
                                             }
                                         }
@@ -53,7 +55,7 @@ struct ExploreGenreView: View {
                 }
             }
             .padding(.horizontal)
-            .navigationTitle("\(viewModel.genreSearch)")
+            .navigationTitle("\(viewModel.genreName)")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Manga.self) { manga in
                 MangaCoverView(manga: manga)

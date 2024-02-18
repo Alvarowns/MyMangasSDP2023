@@ -21,6 +21,8 @@ struct MangaCoverView: View {
         VStack {
             Text(viewModel.titleJapanese ? manga.titleJapanese ?? "" : manga.title ?? "")
                 .mainTitle(size: 30)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
             
             Button {
                 viewModel.titleJapanese.toggle()
@@ -52,8 +54,7 @@ struct MangaCoverView: View {
                 inCollection = true
             }
         }
-        
-        Spacer()
+        .blur(radius: viewModel.isSheetPresented || viewModel.isAlertPresented ? 2.0 : 0.0)
     }
     
     func deleteManga(_ indexSet: IndexSet) {

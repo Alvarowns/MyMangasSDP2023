@@ -27,8 +27,9 @@ class MyCollection {
     var volumesInCollection: Int
     var volumesReaded: Int
     var favorite: Bool
+    var collectionCompleted: Bool
     
-    init(status: String? = nil, volumes: Int? = nil, chapters: Int? = nil, background: String? = nil, titleJapanese: String? = nil, endDate: String? = nil, sypnosis: String? = nil, mainPicture: String? = nil, title: String? = nil, startDate: String? = nil, score: Double? = nil, url: String? = nil, id: Int, titleEnglish: String? = nil, volumesInCollection: Int, volumesReaded: Int, favorite: Bool = false) {
+    init(status: String? = nil, volumes: Int? = nil, chapters: Int? = nil, background: String? = nil, titleJapanese: String? = nil, endDate: String? = nil, sypnosis: String? = nil, mainPicture: String? = nil, title: String? = nil, startDate: String? = nil, score: Double? = nil, url: String? = nil, id: Int, titleEnglish: String? = nil, volumesInCollection: Int, volumesReaded: Int, favorite: Bool = false, collectionCompleted: Bool = false) {
         self.status = status
         self.volumes = volumes
         self.chapters = chapters
@@ -46,5 +47,6 @@ class MyCollection {
         self.volumesInCollection = volumesInCollection
         self.volumesReaded = volumesReaded
         self.favorite = favorite
+        self.collectionCompleted = collectionCompleted
     }
 }

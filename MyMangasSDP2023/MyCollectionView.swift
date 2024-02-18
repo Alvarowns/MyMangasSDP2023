@@ -24,7 +24,7 @@ struct MyCollectionView: View {
         NavigationStack {
             VStack {
                 if myCollection.isEmpty {
-                    ContentUnavailableView(label: {
+                    ContentUnavailableView {
                         VStack {
                             Image(systemName: "heart.slash")
                                 .font(.custom("size", size: 80))
@@ -33,13 +33,13 @@ struct MyCollectionView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                         }
-                    }, description: {
+                    } description: {
                         Text("Start adding mangas to your collection!")
-                    }, actions: {
-                        NavigationLink("Explore some mangas") {
-                            ExploreView()
+                    } actions: {
+                        Button("Explore some mangas") {
+                            viewModel.sheetPresented.toggle()
                         }
-                    })
+                    }
                 } else {
                     List {
                         ForEach(filterSearch) { manga in
@@ -67,8 +67,8 @@ struct MyCollectionView: View {
                                                 VStack(alignment: .center, spacing: 8) {
                                                     Text("Volumes: \(manga.volumesInCollection)/\(manga.volumes ?? 0)")
                                                     
-                                                    Text(manga.volumesInCollection == manga.volumes ? "Completed" : "Incomplete")
-                                                        .foregroundStyle(manga.volumesInCollection == manga.volumes ? Color.green : Color.red)
+                                                    Text(manga.collectionCompleted ? "Completed" : "Incomplete")
+                                                        .foregroundStyle(manga.collectionCompleted ? Color.green : Color.red)
                                                         .fontWeight(.medium)
                                                 }
                                                 
@@ -104,6 +104,9 @@ struct MyCollectionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: MyCollection.self) { manga in
                 MangaCollectionDetailView(manga: manga)
+            }
+            .sheet(isPresented: $viewModel.sheetPresented) {
+                ExploreView()
             }
         }
     }

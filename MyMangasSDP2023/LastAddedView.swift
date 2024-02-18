@@ -19,6 +19,7 @@ struct LastAddedView: View {
                         
                         Text(manga.title ?? "")
                             .titlesMainStyle()
+                            .frame(width: 130)
                             .lineLimit(1)
                     }
                 }

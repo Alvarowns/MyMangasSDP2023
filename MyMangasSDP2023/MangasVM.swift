@@ -21,6 +21,7 @@ final class MangasVM: ObservableObject {
     var searchContains: MangasList = MangasList(items: [], metadata: Metadata(per: 0, total: 0, page: 0))
     
     var search: String = ""
+    var sheetPresented: Bool = false
     
     var deleteAlert = false
     var showAlert = false
@@ -53,7 +54,6 @@ final class MangasVM: ObservableObject {
             await MainActor.run {
                 self.mangas = mangas
                 self.moreMangas.items.append(contentsOf: mangas.items)
-                self.page += 1
             }
         } catch {
             await MainActor.run {
@@ -66,9 +66,9 @@ final class MangasVM: ObservableObject {
     
     func getBestMangas() async {
         do {
-            let mangas = try await network.getBestMangas()
+            let mangas = try await network.getBestMangas(page: page, per: per)
             await MainActor.run {
-                self.bestMangas = mangas
+                self.bestMangas.items.append(contentsOf: mangas.items)
             }
         } catch {
             await MainActor.run {

@@ -14,7 +14,7 @@ struct ExploreView: View {
         NavigationStack {
             ScrollView {
                 if viewModel.filterSearch.isEmpty {
-                    ContentUnavailableView(label: {
+                    ContentUnavailableView {
                         VStack {
                             Image(systemName: "doc.text.magnifyingglass")
                                 .font(.custom("size", size: 80))
@@ -23,13 +23,13 @@ struct ExploreView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                         }
-                    }, description: {
+                    } description: {
                         Text("There are no mangas matching: \(viewModel.search).")
-                    }, actions: {
+                    } actions: {
                         Button("Try again") {
                             viewModel.search = ""
                         }
-                    })
+                    }
                     .padding(.top, 200)
                 } else {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
@@ -39,6 +39,7 @@ struct ExploreView: View {
                                     CoverView(manga: manga)
                                         .onAppear {
                                             if manga.id == viewModel.moreMangas.items.last?.id {
+                                                viewModel.page += 1
                                                 Task {
                                                     await viewModel.getMangas()
                                                 }
@@ -48,6 +49,9 @@ struct ExploreView: View {
                                     Text("\(manga.title ?? "")")
                                         .titlesMainStyle()
                                         .lineLimit(1)
+                                }
+                                .navigationDestination(for: Manga.self) { manga in
+                                    MangaCoverView(manga: manga)
                                 }
                                 .padding(.bottom)
                                 .frame(maxHeight: 285)
@@ -63,13 +67,13 @@ struct ExploreView: View {
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                filterMenu()
-            }
-            .navigationDestination(for: Manga.self) { manga in
-                MangaCoverView(manga: manga)
+                FilterMenu()
             }
         }
         .scrollIndicators(.hidden)
+        .onAppear {
+            viewModel.page = 1
+        }
     }
 }
 

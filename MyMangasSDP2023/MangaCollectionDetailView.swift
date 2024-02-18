@@ -92,6 +92,18 @@ struct MangaCollectionDetailView: View {
                 
                 VStack(spacing: 20) {
                     Button {
+                        if manga.collectionCompleted {
+                            manga.collectionCompleted = false
+                        } else {
+                            manga.collectionCompleted = true
+                        }
+                    } label: {
+                        Text("Completed")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(manga.collectionCompleted ? Color.green : Color.gray)
+                    
+                    Button {
                         if manga.favorite == false {
                             manga.favorite = true
                             viewModel.isFavAlert.toggle()
@@ -143,6 +155,7 @@ struct MangaCollectionDetailView: View {
             viewModel.volumesCollection = manga.volumesInCollection
             viewModel.volumesRead = manga.volumesReaded
         }
+        .blur(radius: viewModel.isSubmitAlert || viewModel.isFavAlert || viewModel.isNoFavAlert ? 2.0 : 0.0)
         .alert("Changes submitted", isPresented: $viewModel.isSubmitAlert) {}
         .alert("Volumes in collection or read can't be higher than the total volumes", isPresented: $viewModel.errorAlert) {}
         .alert("\(manga.title ?? "") added to Favorites", isPresented: $viewModel.isFavAlert) {}
